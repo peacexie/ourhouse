@@ -1,0 +1,147 @@
+
+
+<style type="text/css">
+    label{ font-weight:normal; padding:0.2rem 1rem 0.2rem 0; }
+    input[checkbox]{ vertical-align:middle; }
+    td{ padding:0.5rem; }
+    .modal.in .modal-dialog { z-index:5600; }
+    .nowrap{ 
+        text-align:right; padding:0 1.0rem; 
+        word-break:break-all; white-space:nowrap; word-wrap:keep-all; }
+    .fmneed{ max-width:150px; display:inline-block; }
+    .alertp{ position:relative; }
+    .alert{ position:absolute; display:inline-block !important; top:-40px; right:20px; }
+</style>
+
+
+<?php
+/*
+    a1=价格变动 a2=开盘预告 
+    a3=楼盘动态 a4=看房团
+    b2=想租房 b3=想买房 b1=想看房
+    c1=想咨询 c2=想了解
+    c3=想报错 c4=想投诉
+*/
+$ctbs = [
+    'house' => ['a1','a2','a3','a4'],
+    'sale' => ['b3','b1'],
+    'rent' => ['b2','b1'],
+    'suite' => ['b3','b2',],
+    '_pub' => ['c1','c2'], // ,'c3','c4'
+];
+$ndmsg = $this->mod=='house' ? '楼盘' : '房源';
+$tcfg = read('need.f');
+$cbstr = \imcat\basElm::setCBox('ntype',$tcfg['ntype']['cfgs'],'');
+//dump($tarr);
+?>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myMLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myMLabel">
+                    需求意向-提交
+                </h4>
+            </div>
+            <div class="modal-body"><!--按下 ESC 按钮退出。-->
+                <div class="alertp" style="display:none">
+                    <div class="alert alert-success" role="alert">提示信息</div>
+                </div>
+                <form id="nform" action="#" method="post">
+                    <table width="100%" border="0">
+                        <tr>
+                            <td class="nowrap">目标{=$ndmsg}:</td>
+                            <td>
+                                {=$title}
+                                <input name="fm[part]" value="{=$this->mod}" type="hidden">
+                                <input name="fm[lpid]" value="{=$did}" type="hidden">
+                                <input name="fm[title]" value="{=$title}" type="hidden">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="nowrap">需求意向:</td>
+                            <td>{=$cbstr}</td>
+                        </tr>
+                        <tr>
+                            <td class="nowrap">电话称呼:</td>
+                            <td>
+                        <label class="lab1"><input name="fm[mtel]" class="form-control fmneed" type="text" placeholder="电话" maxlength="15"></label>
+                        <label class="lab2"><input name="fm[mname]" class="form-control fmneed" type="text" placeholder="称呼" maxlength="15"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="nowrap">验 证 码:</td>
+                            <td>
+                                <script>fsInit('fmneed','-192,25','form-control fmneed');</script>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="nsend()">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script>
+
+var ctbs = <?=json_encode($ctbs,1)?>,
+    cmod = '{=$this->mod}',
+    ajurl = "{=PATH_ROOT}/plus/coms/needs.php";
+
+function omodal(e) {
+    $('#myModal').modal({});
+    $('.advFlag ').hide();
+}
+function ninit() {
+    var ctbn = ctbs[cmod],
+        ctbp = ctbs['_pub'];
+    $('.rdcb').each(function(i,e){
+        var iv = $(this).val(); 
+        if(ctbn.indexOf(iv)<0 && ctbp.indexOf(iv)<0){
+            $(this).parent().remove();
+        }
+    });
+}
+ninit();
+
+function nsend(){  
+    $.ajax({
+        type: "POST", dataType: "json", url: ajurl, 
+        data: $('#nform').serialize(),
+        success: function (res) { //jsLog(res);
+            if(res.error){
+                nmsg("error2: "+res.msg, 'warning');
+            }else{
+                nmsg("ok:提交成功!", 'success');
+            }
+        },
+        error: function(res, status) { //jsLog(res);
+            nmsg("error1: ["+status+"]"+res.responseText, 'warning');
+         }
+    }); //jsLog($('#nform').serialize());
+}
+
+function nmsg(msg, style){
+    $('.alertp>div').html(msg);
+    $('.alertp').show();
+    setTimeout(function(){
+        $('.alertp').hide(456);
+        if(style=='success'){
+            $('#fmneed_vimg').trigger('click');
+            $('#myModal').modal('hide');
+            $('.fmneed').val('');
+            $('.rdcb').prop('checked',false);
+            $('.fs_vimg_close').trigger('click');
+        }
+    }, 1300); // success,warning
+}
+
+</script>

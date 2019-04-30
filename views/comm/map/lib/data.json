@@ -1,0 +1,333 @@
+
+[
+  {
+    "title": "检查院生活小区",
+    "point": {
+      "lng": "111.581007",
+      "lat": "26.491799"
+    },
+    "address": "测试县城西",
+    "url": "?house.2019-45-hqoa",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "甜**小区农贸市场",
+    "point": {
+      "lng": "111.597907",
+      "lat": "26.441699"
+    },
+    "address": "测试县城南",
+    "url": "?house.2019-45-hc95",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "华能雅江小区",
+    "point": {
+      "lng": "111.547507",
+      "lat": "26.486199"
+    },
+    "address": "测试县城西",
+    "url": "?house.2019-45-hc94",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "尚城花园",
+    "point": {
+      "lng": "111.521907",
+      "lat": "26.474899"
+    },
+    "address": "测试县城中",
+    "url": "?house.2019-45-hc93",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "甜**小区",
+    "point": {
+      "lng": "111.562607",
+      "lat": "26.457299"
+    },
+    "address": "测试县城南",
+    "url": "?house.2019-45-hc92",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "纺织新街",
+    "point": {
+      "lng": "111.539407",
+      "lat": "26.478399"
+    },
+    "address": "测试县城西",
+    "url": "?house.2019-45-hc87",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "景光院小区",
+    "point": {
+      "lng": "111.582807",
+      "lat": "26.429199"
+    },
+    "address": "测试县城北",
+    "url": "?house.2019-45-hc85",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "加定嘎路",
+    "point": {
+      "lng": "111.528007",
+      "lat": "26.486899"
+    },
+    "address": "测试县城北",
+    "url": "?house.2019-45-hc82",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "永久自建房适合做酒店",
+    "point": {
+      "lng": "111.539107",
+      "lat": "26.444999"
+    },
+    "address": "测试县城西",
+    "url": "?house.2019-45-hc35",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "青年公寓",
+    "point": {
+      "lng": "111.546007",
+      "lat": "26.494499"
+    },
+    "address": "测试县城中",
+    "url": "?house.2019-45-hc30",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "客运站",
+    "point": {
+      "lng": "111.556007",
+      "lat": "26.421999"
+    },
+    "address": "测试县城北",
+    "url": "?house.2019-45-hc27",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "林芝花园",
+    "point": {
+      "lng": "111.575307",
+      "lat": "26.434099"
+    },
+    "address": "测试县城东",
+    "url": "?house.2019-45-hc24",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "卫生花苑",
+    "point": {
+      "lng": "111.516207",
+      "lat": "26.455699"
+    },
+    "address": "测试县城中",
+    "url": "?house.2019-45-hc23",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "圣安苑",
+    "point": {
+      "lng": "111.556407",
+      "lat": "26.481899"
+    },
+    "address": "测试县城北",
+    "url": "?house.2019-45-hc21",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "水厂小区",
+    "point": {
+      "lng": "111.557907",
+      "lat": "26.478499"
+    },
+    "address": "测试县城西",
+    "url": "?house.2019-45-hc19",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "尼洋花园",
+    "point": {
+      "lng": "111.572807",
+      "lat": "26.425199"
+    },
+    "address": "测试县城中",
+    "url": "?house.2019-45-hc18",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "双拥路",
+    "point": {
+      "lng": "111.552707",
+      "lat": "26.460799"
+    },
+    "address": "测试县城北",
+    "url": "?house.2019-45-hc14",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "清苑小区",
+    "point": {
+      "lng": "111.538607",
+      "lat": "26.499599"
+    },
+    "address": "测试县城中",
+    "url": "?house.2019-45-hc13",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "水利局退休小区",
+    "point": {
+      "lng": "111.519707",
+      "lat": "26.483299"
+    },
+    "address": "测试县城中",
+    "url": "?house.2019-45-hc05",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "福清花园",
+    "point": {
+      "lng": "111.582107",
+      "lat": "26.472699"
+    },
+    "address": "测试县城中",
+    "url": "?house.2019-45-hc04",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "工布映像",
+    "point": {
+      "lng": "111.594607",
+      "lat": "26.474599"
+    },
+    "address": "测试县城西",
+    "url": "?house.2019-45-hc01",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "安*某家园",
+    "point": {
+      "lng": "111.593800",
+      "lat": "25.507630"
+    },
+    "address": "小江口路790",
+    "url": "?house.2019-45-gzua",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": "{uresroot}\/mdown\/house\/10003\/264552483-e1ad9a8947efda5851a5e16a0186a440.jpg"
+  },
+  {
+    "title": "东城云顶",
+    "point": {
+      "lng": "111.620060",
+      "lat": "26.423350"
+    },
+    "address": "育才路8号",
+    "url": "?house.2019-45-gzsz",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": "{uresroot}\/mdown\/house\/10395\/1287574955-b990398295541e43a9b726932fa2f193.jpg"
+  },
+  {
+    "title": "城市荣域",
+    "point": {
+      "lng": "111.59642600779",
+      "lat": "26.471488678084"
+    },
+    "address": "城市荣域\/冷水滩区凤凰园凤凰路与梧桐路交汇处东南角",
+    "url": "?house.2019-45-gvpq",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "永粮国际",
+    "point": {
+      "lng": "111.61718051716",
+      "lat": "26.4585650844"
+    },
+    "address": "永粮国际\/零陵北路",
+    "url": "?house.2019-45-gvhj",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "涵天龙泉壹号",
+    "point": {
+      "lng": "112.183160",
+      "lat": "25.904820"
+    },
+    "address": "龙泉镇银象路龙泉1号",
+    "url": "?house.2019-45-gvfs",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": "{uresroot}\/mdown\/house\/10586\/3334595626-8e0f5aebba1bed5763cd644b9569fc76.png"
+  },
+  {
+    "title": "黄古山中路",
+    "point": {
+      "lng": "111.588807",
+      "lat": "26.484699"
+    },
+    "address": "黄古山中路\/黄古山中路",
+    "url": "?house.2019-45-gu09",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "御龙苑小区",
+    "point": {
+      "lng": "111.63017862267",
+      "lat": "26.244454387622"
+    },
+    "address": "御龙苑小区\/南津北路",
+    "url": "?house.2019-45-gu08",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "怡景花园",
+    "point": {
+      "lng": "111.64369031018",
+      "lat": "26.250132665227"
+    },
+    "address": "怡景花园\/萍洲东路",
+    "url": "?house.2019-45-gu07",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  },
+  {
+    "title": "东山家园",
+    "point": {
+      "lng": "111.62935770593",
+      "lat": "26.229750940626"
+    },
+    "address": "东山家园\/徐家井路",
+    "url": "?house.2019-45-gu06",
+    "phoneNumber": "0764-7788 9900",
+    "thumb": ""
+  }
+]

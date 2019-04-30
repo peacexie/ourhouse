@@ -1,0 +1,44 @@
+
+<!-- 楼盘详情-独立菜单 -->
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <span class="right">
+      <b class="btn btn-default qrcode_tip hid480 fa fa-qrcode" onMouseOver="qrurl_act(1,1,1)" onMouseOut="qrurl_act(1,0)"><i class="qrcode_pic" id="qrcode_pic1" style="display:none;"></i></b>
+    </span>
+    <li><a href="{surl(0)}">{=$_cbase[sys_name]}</a></li>
+    <li><a href="<?=surl('house-'.($catid?$catid:'lp'))?>">{=$tpname}</a></li>
+    {if !empty($apid)}<li class="hidden-xs"><a href="{surl(house-lp)}&local={=$apid}">{sopt($areas,local,0,0)}{=$tpname}</a></li>{/if}
+    <li class="active">{=$title}</li>
+  </ol>
+
+  <nav class="navbar navbar-default"><!--default,inverse-->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">{=$title}</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li id="idf_home"><a href='{surl("house.$did")}'     >楼盘首页</a></li>
+          <li id="idf_more"><a href='{surl("house.$did.more")}'>详情</a></li>
+          <li id="idf_hu">  <a href='{surl("house.$did.hu")}'  >户型</a></li>
+          <li id="idf_tu">  <a href='{surl("house.$did.tu")}'  >相册</a></li>
+          <li id="idf_news"><a href='{surl("house.$did.news")}'>动态</a></li>
+          <li id="idf_cs">  <a href='{surl("house.$did.cs")}'  >出售</a></li>
+          <li id="idf_cz">  <a href='{surl("house.$did.cz")}'  >租房</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li id="idf_rent"><a href="<?=surl('house-'.($catid?$catid:'lp'))?>"><span class="fa fa-mail-reply"></span> 其它{=$tpname}</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+

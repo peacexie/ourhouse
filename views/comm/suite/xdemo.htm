@@ -1,0 +1,106 @@
+
+<!DOCTYPE html><html><head>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'>
+<title>xx小区</title>
+<script src='/peace/imcat/ourhouse/index.php?ajax-comjs&act=initJs&tpldir=comm&lang=cn&rf=rent.2019-45-h236&exjs=jquery;bootstrap;comm&_r=4.6'></script>
+<link href='/peace/imcat/ourhouse/index.php?ajax-comjs&act=initCss&tpldir=comm&lang=cn&skin=min&excss=bootstrap,stpub;comm&_r=4.6' type='text/css' rel='stylesheet'/>
+<style type="text/css">
+
+.adb-311{ width:25%; text-align:right; float:right; display:inline-block; }
+.adb-312{ width:75%; text-align:left; float:left; display:inline-block; }
+.adb-311 img, .adb-312 img{ width:100%; height:60px; }
+.adb-311in{ margin-left:0.5rem; }
+.adb-312in{ margin-right:0.5rem; }
+
+@media (max-width:620px){ 
+    .adb-311{ width:100%; text-align:center; float:none; display:block; }
+    .adb-312{ width:100%; text-align:center; float:none; display:block; }
+    .adb-311 img{ width:100%; }
+    .adb-312 img{ width:100%; }
+    .adb-311in{ margin:0 0 1.0rem 0; }
+    .adb-312in{ margin:0; }
+}
+@media (max-width:350px){ 
+    .adb-311{ width:100%; text-align:center; float:none; display:block; }
+    .adb-312{ width:100%; text-align:center; float:none; display:block; }
+    .adb-311 img{ width:100%; }
+    .adb-312 img{ width:100%; }
+}
+
+</style>
+
+</head><body>
+
+
+<div class="container">
+
+
+
+aaa
+<div>
+    <div class="adb-311">
+        <div class="adb-311in" id='jsid_advs_adpic_250x60a'><!--adpic:a2018--></div>
+    </div>
+    <div class="adb-312">
+        <div class="adb-312in" id='jsid_advs_adpic_boxpic'><!--adpic:a2014--></div>
+    </div>
+</div>
+bbb
+<div class="clear"></div>
+
+
+<div class="table-responsive">
+<table class="home-adv0">
+  <tr>
+    <td align="left"><img src="/peace/imcat/share_ximps/static/media/collect/fbot-e4.jpg" width="850" height="60"></td>
+    <td align="right"><img src="/peace/imcat/share_ximps/static/media/collect/fbot-e1.jpg" width="280" height="60"></td>
+  </tr>
+</table>
+</div>
+
+
+
+
+---
+
+<p>x<p>
+<p>x<p>
+<p>x<p>
+
+<!-- 按钮触发模态框 -->
+<button onclick="omodal()" class="btn btn-primary btn-lg">
+    开始演示模态框
+</button>
+
+
+<?php
+$this->mod = 'house';
+$title = '安*某家园';
+$did = '2019-45-gzua';
+?>
+
+{inc:"suite/_modal"}
+
+
+</div>
+
+<?php
+
+$a1 = [1,2,3,4,5,6,7,8,9,0];
+
+$res = [];
+foreach($a1 as $ri=>$row){
+    if(in_array($ri,[3,6])){
+        $res[200+$ri] = $row;
+    }else{
+        $res[100+$ri] = $row;
+    }
+}
+//ksort($res);
+//dump($res);
+
+?>
+
+</body></html>

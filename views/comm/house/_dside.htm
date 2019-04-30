@@ -1,0 +1,82 @@
+
+
+<div class="col-md-3">
+{if !$this->view}
+<div class="h20">&nbsp;</div>
+{/if}
+
+
+<div class="panel panel-default hidden-xs">
+  <div class="panel-heading">
+    <span class="right">
+      <a href='{surl("house-$catid")}'>More</a>
+    </span>
+    同区域 {=$tpname}
+  </div>
+  <div class="panel-body side">
+    {tag:hinfs=[List][modid,$this->mod][where,$whr_a][limit,5]}
+    <li class="type">
+      <span class="right">{=$locals[$apid]['title']}</span>
+      <a href="{surl($this->mod.".$t_did")}">{title($t_title,20,$v)}</a>
+    </li>
+    {/tag:hinfs}
+  </div>
+</div>
+
+
+<div class="panel panel-default hidden-xs">
+  <div class="panel-heading">
+    <span class="right">
+      <a href='{surl("house-$catid")}'>More</a>
+    </span>
+    同价位 {=$tpname}
+  </div>
+  <div class="panel-body side">
+    {tag:hinfs=[List][modid,$this->mod][where,$whr_p][limit,5]}
+    <li class="type">
+      <span class="right"><?=tex('texHouse')->vprcie($t_price,$t_punit)?></span>
+      <a href="{surl($this->mod.".$t_did")}">{title($t_title,20,$v)}</a>
+    </li>
+    {/tag:hinfs}
+  </div>
+</div>
+
+
+{if $this->view}
+<div class="sd-adv60"> 
+    <span id='jsid_advs_adpic_250x60a'><!--adpic:a2018--></span>
+</div>
+<div class="h10">&nbsp;</div>
+{/if}
+
+
+{if $this->view}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form method="get" action="{surl(0)}">
+    <input name="mkv" type="hidden" value="{=$this->mod}--list">
+    <select name="stype" class="form-control"><?=basElm::setOption($this->mod,$catid,'')?></select>
+    <div class="pt10">
+        <input name="keywd" type="text" id="keywd" class="form-control wp60 inblock" value="{=$keywd}" />
+        <input type="submit" id="sobtn" value="搜索" class="form-control wp30 inblock" />
+    </div>
+    </form>
+  </div>
+</div>
+{/if}
+
+
+{if $this->view}
+<div class="panel panel-default">
+  <div class="panel-heading">Catalog/类别</div>
+  <div class="panel-body side">
+    {tag:tp=[Type,u][modid,$this->mod][idfix,top]}
+    <li class="type"><a href="{surl($this->mod."-$t_kid")}" {if $t_kid==$catid}class='act'{/if}>{title($t_title,32,$u)}</a></li>
+    {/tag:tp}
+  </div>
+</div>
+{/if}
+
+
+</div>
+

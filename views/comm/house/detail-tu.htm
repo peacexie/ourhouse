@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head>
+{code:"house/_dinit"}
+</head><body>
+  
+<!--{inc:"u-inc/ahead"}-->
+{inc:"house/_dmenu"}
+
+<div class="row">
+  <div class="col-md-9">
+
+    <div class="sobar" id="sobar">
+      <p>
+        <b>相册筛选</b> <span id="sohxs">
+            {tag:d_xtop=[Type][modid,album][idfix,top]}
+            <a href="#" id='pnav_{=$t_kid}' onclick="vpart('{=$t_kid}')">{=$t_title}室</a>
+            {/tag:d_xtop}
+            <a href="#" id='pnav_'  onclick="vpart('')">[全部]</a>
+        </span>
+      </p>
+      
+    </div>
+
+    <!--list_start  -->
+    <div class="row list-table">
+      {tag:dlist=[List][modid,album][where,$whrp][limit,999]}
+      {:row}
+      <div class="col-md-3 pitm vitms_{=$t_catid}">
+        <p class="tc picbox uimark-pos-rel">
+        <img src="{spic($t_mpic,demo_nop300x200.jpg)}" width='160' height='120' class="img-thumbnail" onload='imgShow(this,160,120)' />
+        {if !empty($t_hinfo)}<b class="uimark-star-icon1b"></b>{/if}</p>
+        <p class="title"><a href='{surl($this->mod.".$t_did")}'>{title($t_title,96,$v)}</a></p>
+      </div> 
+      {/row}
+
+      {/tag:dlist}
+    </div> 
+
+  </div>
+  {inc:"house/_dside"}
+</div>
+
+
+<script>
+
+$('#sobar a').each(function(i,e){
+    var no = $(this).prop('id').replace('pnav_','');
+    if(no!=''){
+        if($('.list-table .vitms_'+no).length==0){
+            $(e).hide();
+        }
+    }
+});
+
+var pp = null;
+function vpart(no){
+  if(!no){
+    $('.list-table .pitm').show();
+    pp = $('.list-table').picView({box:'picvbox', css:'picvcss'}); 
+  }else{
+    $('.list-table .pitm').hide();
+    $('.list-table .vitms_'+no).show();
+    pp = $('.list-table .vitms_'+no).picView({box:'picvbox', css:'picvcss'}); 
+  }
+  $('#sobar a').removeClass('act');
+  $('#pnav_'+no).addClass('act');
+}
+vpart('');
+
+_cbase.jsrun.menuid = '{=$this->view}';
+
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

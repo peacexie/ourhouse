@@ -1,0 +1,240 @@
+<!DOCTYPE html><html><head>
+{php $this->pmeta('功能演示版 - '.$_cbase['sys_name']); }
+{php}
+eimp('initJs','jquery;bootstrap;comm');
+eimp('initCss','bootstrap,stpub;comm;home');
+{/php} 
+</head><body>
+{inc:"u-inc/ahead"}
+{inc:"u-inc/amenu"}
+
+<?php $res=tagPush::gets('cargo-push8,news-push2,hpic-push5');?>
+
+{inc:"home/inc-adtop"}
+
+<div class="row pv20">
+
+  <div class="col-md-5 home-hot">
+      <div class="h20 visible-xs-block">&nbsp;</div>
+      <dl class="adpush_obj" aid='news-push2'>
+      {php $i_v=0; }
+      {loop $res['news-push2'] $key $v}
+          {if ($i_v==0) }
+          <dt class="top1"><a href="{=$v['url']}">{title($v['title'],24,$v)}</a></dt>
+          <dd class="note1"> {=$v['rem']} </a></dd>
+          {elseif ($i_v==1) }
+          <dt class="top2"><a href="{=$v['url']}">{title($v['title'],24,$v)}</a></dt>
+          <dd class="note2"> {=$v['rem']}</dd>
+          {/if}
+      {php $i_v++; }{/loop}
+      <dt class="line">&nbsp;</dt>
+      </dl>
+      <dl>
+          {tag:dlistn=[List][modid,house][limit,5][stype,lp][offset,5]}
+          <dd>
+            <i class="right"><?=tex('texHouse')->vprcie($t_price,$t_punit)?></i>
+            <i class="right">{sopt($t_sales,fang,0)} | </i>
+            <?php $_apid = !empty($locals[$t_areas]['pid']) ? $locals[$t_areas]['pid'] : $t_areas; ?>
+            {if !empty($_apid)}{sopt($t_areas,local,0,0)} | {/if}
+            <a href="{surl("house.$t_did")}">{title($t_title,24,$v)}</a>
+          </dd>
+          {/tag:dlistn} <!--[hinfo,pindao+home+zhuanti,in]-->
+      </dl>
+  </div>
+
+  <div class="col-md-2 home-toolbar">
+      <div class="panel panel-default" style="margin-bottom:0px">
+        <div class="panel-heading">翻译/搜索</div>
+        <div class="panel-body" style="border-bottom:1px solid #DDD;">
+          {inc:"u-inc/inc-i18n"}
+        </div>
+        <div class="panel-body">
+          {inc:"u-inc/inc-search"}
+        </div>
+      </div>
+  </div>
+
+  <div class="col-md-5">
+      <div class="swiper-container adpush_obj" aid='hpic-push5'>
+      <ul class="home-adpic02 swiper-wrapper" id="adpic02">
+        {tag:dlp=[List][modid,house][stype,lp][limit,5]}
+        <li class="swiper-slide">
+        <a href='{surl("house.$t_did")}'><img src="{spic($v['mpic'],demo_nop300x200.jpg)}" width="100%" height="300"/></a>
+        <p><a href='{surl("house.$t_did")}'>{title($v['title'],96,$v)}</a></p>
+        </li>
+        {/tag:dlp}
+      </ul>
+      <!--div class="swiper-pagination"></div-->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      </div>
+  </div>
+
+</div>
+
+{inc:"home/inc-adbar2"}
+
+<div class="row pv10">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="right"><a href="{surl(sale)}">更多&gt;&gt;</a></i>
+        二手房
+      </div>
+      <div class="panel-body">
+        <div class="row home-fy">
+        <!--list_start-->
+        <?php $_i=0; ?>
+        {tag:des=[List][modid,sale][limit,6]}
+        <?php $_i++; if($_i==4){ echo "<div class='h20 clear'>&nbsp;</div>"; } ?>
+        <dl class="col-md-4">
+          <dd>
+            <p class="tc uimark-pos-rel">
+            <a href='{surl("sale.$t_did")}'><img src="{spic($v['mpic'],demo_120x90.jpg,160x120)}" width='160' height='120' class="img-thumbnail" onload='imgShow(this,160,120)' /></a>
+            {if !empty($v['star'])}<b class="uimark-star-icon1b"></b>{/if}</p>
+            <p class="tc">
+              <i><?=tex('texHouse')->vprcie($t_pall,'万')?></i>
+              | <i><?=mb_substr($t_hxs,0,4)?></i>
+              | <i>面积:{=$t_mjout}㎡ </i>
+            </p>
+          </dd> 
+          <dt class="title clear"><a href='{surl("sale.$t_did")}'>{title($v['title'],96,$v)}</a></dt>
+        </dl>
+        {/tag:des}
+        <!--list_end-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default left-15">
+
+      <div class="panel-heading">
+        <i class="right"><a href="{surl(news)}">更多&gt;&gt;</a></i>
+        最新资讯
+      </div>
+      <div class="panel-body home-side">
+          <!--list_start-->
+          {tag:tlist=[List][modid,news][limit,5]}
+          <p>
+            <i class="right">{stime($t_atime,m-d)}</i>{php echo $i_v+1; }. <a href="{surl("news.$t_did")}">{title($t_title,45,$v)}</a>
+          </p>
+          {/tag:tlist}
+          <!--list_end-->
+      </div>
+
+      <div class="panel-heading">
+        <i class="right"><a href="{surl(faqs)}">更多&gt;&gt;</a></i>
+        最新问答
+      </div>
+      <div class="panel-body home-side">
+          <!--list_start-->
+          {tag:tlist=[List][modid,faqs][limit,5]}
+          <p>
+            <i class="right">{stime($t_atime,m-d)}</i>{php echo $i_v+1; }. <a href="{surl("faqs.$t_did")}">{title($t_title,45,$v)}</a>
+          </p>
+          {/tag:tlist}
+          <!--list_end-->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{inc:"home/inc-adbar1"}
+
+<?php
+$null2 = "<span class='cCCC'>------</span>";
+$null3 = "";
+?>
+<div class="row pv10">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <i class="right"><a href="{surl(rent)}">更多&gt;&gt;</a></i>
+        出租房
+      </div>
+      <div class="panel-body">
+        <div class="row home-fy">
+        <!--list_start: uimark-pos-rel-->
+          <?php $_i=0; ?>
+          {tag:dcz=[List][modid,rent][limit,6]}
+          <?php $_i++; if($_i==4){ echo "<div class='h20 clear'>&nbsp;</div>"; } ?>
+          <dl class="col-md-4">
+            <dd>
+              <p class="tc uimark-pos-rel">
+              <a href='{surl("rent.$t_did")}'><img src="{spic($v['mpic'],demo_120x90.jpg,160x120)}" width='160' height='120' class="img-thumbnail" onload='imgShow(this,160,120)' /></a>
+              {if !empty($v['star'])}<b class="uimark-star-icon1b"></b>{/if}</p>
+              <p class="tc">
+                <i><?=tex('texHouse')->vprcie($t_price,'元/月')?></i>
+                | <i><?=mb_substr($t_hxs,0,4)?></i>
+                | <i>面积:{=$t_mjout}㎡ </i>
+              </p>
+            </dd> 
+            <dt class="title clear"><a href='{surl("rent.$t_did")}'>{title($v['title'],96,$v)}</a></dt>
+          </dl>
+          {/tag:dcz}
+        <!--list_end-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default left-15">
+
+      <div class="panel-heading">
+        <i class="right"><a href="{surl(topic)}">更多&gt;&gt;</a></i>
+        专题新闻
+      </div>
+      <div class="panel-body home-side">
+          <!--list_start-->
+          {tag:tlist=[List][modid,topic][limit,5]}
+          <p>
+            <i class="right">{stime($t_atime,m-d)}</i>{php echo $i_v+1; }. <a href="{surl("topic.$t_did")}">{title($t_title,45,$v)}</a>
+          </p>
+          {/tag:tlist}
+          <!--list_end-->
+      </div>
+
+      <div class="panel-heading">
+        <i class="right"></i>
+        最新意向
+      </div>
+      <div class="panel-body home-side">
+          <!--list_start-->
+          {tag:clist=[List][modid,need][show,all][limit,5]}
+          <p>
+            <i class="right"><?=tex('texBase')->time($t_atime)?></i>
+            <?=subRep($t_mtel)?> | {title($t_mname,45,$v)}
+          </p>
+          {/tag:clist}
+          <!--list_end-->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{inc:"home/inc-adbar2"}
+<div class="h10">&nbsp;</div>
+{inc:"u-inc/inc-blinks"}
+
+{inc:"u-inc/afoot"}
+
+<link href='{=PATH_VENDUI}/common/swiper.min.css' type='text/css' rel='stylesheet'/>
+<script src='{=PATH_VENDUI}/common/swiper.jquery.min.js'></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  var mySwiper = new Swiper('.swiper-container', {
+    //pagination : '.swiper-pagination',
+    prevButton:'.swiper-button-prev',
+    nextButton:'.swiper-button-next',
+    loop : true,
+    autoplay: 5000//可选选项，自动滑动
+  });
+});
+</script>
+
+<?php if(req('adpush')=='load' && tagPush::check()){tagPush::load();} ?>
+
+</body></html>

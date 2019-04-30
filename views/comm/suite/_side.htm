@@ -1,0 +1,39 @@
+
+
+<div class="col-md-3">
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form method="get" action="{surl(0)}">
+    <input name="mkv" type="hidden" value="{=$this->mod}--list">
+    <select name="stype" class="form-control"><?=basElm::setOption($this->mod,$this->key,'')?></select>
+    <div class="pt10">
+        <input name="keywd" type="text" id="keywd" class="form-control wp60 inblock" value="{=$keywd}" />
+        <input type="submit" id="sobtn" value="搜索" class="form-control wp30 inblock" />
+    </div>
+    </form>
+  </div>
+</div>
+
+<div class="sd-adv60"> 
+    <span id='jsid_advs_adpic_250x60a'><!--adpic:a2018--></span>
+</div>
+<div class="h10">&nbsp;</div>
+
+<div class="panel panel-default hidden-xs">
+  <div class="panel-heading">
+    <span class="right">
+      <a href='{surl($this->mod)}'>More</a>
+    </span>
+    {=$tpsu2}
+  </div>
+  <div class="panel-body side">
+    {tag:hinfs=[List][modid,$this->mod][limit,5]}
+    <li class="type"><a href="{surl($this->mod.".$t_did")}">{title($t_title,20,$v)}</a></li>
+    {/tag:hinfs}
+  </div>
+</div>
+    
+</div>
+

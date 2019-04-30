@@ -1,0 +1,128 @@
+<!DOCTYPE html><html><head>
+{code:"house/_soinit"}
+<script src="{=PATH_BASE}?ajax-comjs&act=jsTypes:house,local,fang;"></script> 
+</head><body>
+{inc:"u-inc/ahead"}
+{inc:"u-inc/amenu"}
+
+<div class="row">
+  <div class="col-md-9">
+    <!--main_start-->
+
+    <div class="sobar" id="sobar">
+      <p><b>县区</b> <span id="solocal1"></span></p>
+      {if $apid}
+      <p><b>乡镇</b> <span id="solocal2"></span></p>
+      {/if}
+      <p><b>均价</b> <span id="soprice"></span></p>
+
+      <p class="inblock right"><b>销售</b> <span id="sosa"></span></p>
+      <p class="inblock"><b>类型</b> <span id="sowy"></span></p>
+
+      <p class="inblock right"><b>户型</b> <span id="sohx"></span></p>
+      <p class="inblock"><b>装修</b> <span id="sozx"></span></p>
+      
+    </div>
+
+    <div class="sobar soline"> 
+      <p class="order">
+       <i id="so_def"></i>
+       <i id="so_click"></i>
+       <i id="so_salse"></i>
+      </p>
+      <p class="sokeys" id="sokeys">
+        <span class="hidden-xs">找到</span> <i class="js_allrec">(0)</i> 
+        条<span class="hidden-xs">纪录</span>
+        <a href="{surl(house-lp)}" class="soclear" id="soclear">清除条件</a>
+      </p>
+    </div>
+
+    <div class="h10">&nbsp;</div>
+    <!--list_start-->
+    <ul class="lp-table">
+      {tag:dlist=[Page][modid,$this->mod][stype][where,$whr][order,0,click+price][limit,12]}
+      {:row}
+      <li class="">
+        <div class="price hidden-xs">
+              <?=tex('texHouse')->vprcie($t_price,$t_punit)?>
+              <br>
+              {sopt($t_sales,fang,0,$nul1)}
+              <br>
+              <a>户型({=$t_cnthx})</a>
+              <br>
+              <a>租({=$t_cntcz})</a> | <a>售({=$t_cntcs})</a>
+        </div>
+        <div class="mpic uimark-pos-rel"><a href='{surl($this->mod.".$t_did")}'>
+          {if !empty($t_cntpic)}<span class='label label-default uimark-pos-abs'>{=$t_cntpic}图</span>{/if}
+          <img src="{spic($t_mpic,demo_nop300x200.jpg)}" width='200' height='160' class="img-thumbnail" onload='imgShow(this,200,160)' /> 
+        </a></div>
+        <div class="detail">
+          <p class="title"><a href='{surl($this->mod.".$t_did")}'>{title($t_title,96,$v)}</a></p>
+          <p>
+            {sopt($t_wytype,fang,0,$nul2)} 
+            | {sopt($t_jztype,fang,0,$nul2)} {sopt($t_jzframe,fang,0,$nul2)} 
+            | <?=tex('texHouse')->vnian2($t_jznian)?>
+            | {sopt($t_zxtype,fang.zx,0,$nul2)}
+          </p>
+          <p>
+            <?php $_apid = !empty($locals[$t_areas]['pid']) ? $locals[$t_areas]['pid'] : $t_areas; ?>
+            {if !empty($_apid)}[{sopt($t_areas,local,0,0)}]{=$tpname}{/if}
+            {=$t_addr}
+          </p>
+          <p class="tagp">
+            <span class="tags">
+            <?=tex('texHouse')->vtags($t_sotags);?>
+            </span>
+          </p>
+          <p class="price visible-xs-inline">
+            <?=tex('texHouse')->vprcie($t_price,$t_punit)?> , 
+            <a>户型({=$t_cnthx}) , 
+            <a>租({=$t_cntcz})</a> | <a>售({=$t_cntcs})</a> ,
+            {sopt($t_sales,fang,0,$nul1)}
+          </p>
+        </div>
+      </li> 
+      {/row}
+        <div colspan="{=$col}" class="clear pa5">
+        {php echo $_cbase['page']['bar']; }
+        </div>
+      {/tag:dlist}
+    </ul>  
+    <!--main_end-->
+  </div>
+  <div class="col-md-3">
+    {inc:"house/_side"}
+  </div>
+</div>
+
+<script>
+
+var s,linktpl = "<a href='(url)' class='(act)'>(title)</a>"; 
+sordb_init('house', 'lp', 0, '', linktpl);
+var atype = sordb_cfgs.slay.split(','), amtype = atype.length>=0 ? atype[0] : '(null)'; 
+
+s = sordb_extype(0,'local-0','act'); $('#solocal1').html(s);
+<?php if($apid){ ?>
+s = sordb_extype(0,'local-<?=$apid?>','act'); $('#solocal2').html(s);
+if($('#solocal2').find('a').length<2) $('#solocal2').parent().hide(); 
+<?php } ?>
+
+s = sordb_area(0,'price:0.5,0.8,1,1.5,2,2.5,3,5:万','act'); $('#soprice').html(s);
+arr = ["1=1室", "2=2室", "3=3室", "4=4室", "5=5室", "50=5室以上"];
+s = sordb_links(0,'hxroom','act',undefined,arr,urlPara('hxroom','')); $('#sohx').html(s);
+
+s = sordb_extype(0,'fang-wy','act',undefined,'wy'); $('#sowy').html(s);
+s = sordb_extype(0,'fang-zx','act',undefined,'zx'); $('#sozx').html(s);
+s = sordb_extype(0,'fang-sa','act',undefined,'sa'); $('#sosa').html(s);
+
+s = sordb_ordby(0,'默认','','def-act,def,(def)'); $('#so_def').html(s);
+s = sordb_ordby(0,'点击','click','oasc,odesc,ondesc,'); $('#so_click').html(s);
+s = sordb_ordby(0,'价格','price','oasc,odesc,onasc,1'); $('#so_salse').html(s); 
+
+$('.js_allrec').html($('.pg_total').text());
+sordb_hideClear('soclear');
+
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

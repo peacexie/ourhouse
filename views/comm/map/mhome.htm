@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html><html><head>
+{code:"map/_minit"}
+<script src="http://api.map.baidu.com/api?v=2.0&ak={=$mapkey}"></script>
+<script src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" rel="stylesheet" type="text/css"/>
+<link href="{=PATH_VIEWS}/comm/map/lib/map.css" rel="stylesheet" type="text/css"/>
+<script src="{=PATH_VIEWS}/comm/map/lib/mapApis.js"></script>
+<script src="{=PATH_VIEWS}/comm/map/lib/mapDetail.js"></script>
+</head><body>
+
+<div class="nmapbox" style="width:{=$w0}px;">
+    <div class="nmaptitle">
+        <div class="nmaptitleleft">
+            <span> {=$row['title']} 地图</span>
+        </div>
+        <div class="nmaptitleright">
+            <div class="icon_menu" id="icon_menu">
+                <a class="i3" id="btn_disTool">测距</a>
+                <a href="javascript:void(0)" class="i4" id="btn_gj">公交</a>
+                <a href="javascript:void(0)" class="i5" id="btn_jc">驾车</a>
+                <!--a class="i3" id="btn_fullScreen">全屏</a-->
+            </div>
+        </div>
+    </div>
+    <div class="nmapcontent">
+        <div class="box" style="width:{=$w0}px; height:{=$h0}px;">
+            <div class="detail_inform" style="width:{=$w0}px; border: 0">
+                <div class="detail_inform_cont" style="margin: 0;">
+                    <div id="roundmap_map" class="roundmap_map" style="width:{=$w1}px; height:{=$h0}px; ">
+                        <div id="maptip" style="left:673px; top:130px; "></div>
+                        <div id="mapObj" style="height:{=$h0}px;"></div>
+                    </div>
+                    <div class="mapsele" id="mapsele" style="height:{=$h0}px;margin-right:0">
+                        <div class="msclose" id="msclose"></div>
+                        <div class="mapTab" id="mapTab">
+                            <ul>
+                                <li><a id="loupan"><span class="s1"></span>周边楼盘</a></li>
+                                <li><a id="traffic"><span class="s2"></span>交通</a></li>
+                                <li><a id="fun"><span class="s3"></span>娱乐</a></li>
+                                <li><a id="shop"><span class="s4"></span>超市</a></li>
+                                <li><a id="eat"><span class="s5"></span>餐饮</a></li>
+                                <li><a id="bank"><span class="s6"></span>银行</a></li>
+                                <li><a id="hos"><span class="s7"></span>医院</a></li>
+                                <li><a id="park"><span class="s8"></span>公园</a></li>
+                                <li><a id="school"><span class="s9"></span>学校</a></li>
+                            </ul>
+                        </div>
+                        <div class="map_lp" id="near_search_wrap">
+                            <div id="list_wrap" class="type_wrap">
+                                <div class="map_tit"><a href="javascript:void(0)">返回</a><strong> {=$row['title']} 周边楼盘</strong>
+                                </div>
+                                <div class="map_lpcon" style="height:{=$h1}px;">
+                                    <div id="list_cont" class="map_dl">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map_lp">
+                            <div class="map_tit">
+                                <a href="javascript:void(0)">返回</a>
+                                <strong id="traffic_title">公交</strong>
+                            </div>
+                            <div class="map_lpcon" style="height:{=$h1}px;">
+                                <ul class="map_ipt" style="display:block;" id="bus_ipt">
+                                    <li><input type="text" class="ipt_txt" name="" id="sstartname" value="{=$row['title']}" placeholder="请输入起点"></li>
+                                    <li><input type="text" class="ipt_txt" name="" id="sendname" value="" placeholder="请输入终点"></li>
+                                    <li><input type="button" class="ipt_btn" id="btn_Router" value="获取线路"></li>
+                                    <li class="change"><a id="changeStartEnd" href="javascript:void(0)"></a></li>
+                                </ul>
+                                <div class="" style="display:none;" id="traffic_type">1</div>
+                                <div class="traffic_result" style="display:none;" id="bus_wrap"></div>
+                                <div class="traffic_result map_line" style="display:none;" id="drive_wrap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+
+-->
+
+<script>
+
+var map_query = '{surl(0)}?map-json'; // ./lib/data.json
+// {=PATH_VIEWS}/comm/map/lib/demo-data.js?
+
+var data, // 所有周边数据,查找成功后不第二次查找
+    usrData = {},
+    map, // 地图对象
+    row = { // 参数
+        width: "{=$w1}px", wfull: "{=$w0}px", vtype: "1",
+        "x": {=$pnts[0]}, "y": {=$pnts[1]},
+        "title": '{=$row['title']}',
+        "address": '{=$row['addr']}',
+        "tel": '400 8888 999转777',
+        "price": "<?=tex('texHouse')->vprcie($row['price'],$row['punit'])?>",
+        "url":"?house.{=$row['did']}",
+        "thumb":"{=$thumb}",
+        "city": '{=$cityname}', "area": '{=$apname}',
+        "_end": '1'
+    };
+
+$(function(){setTimeout(function(){
+    mapApis.create('#mainPiont'); 
+    catMap.init();    
+},327)});
+</script>
+
+
+<script id="mainPiont" type="text/html">
+<div class="qp01">
+    <div class="s1">
+        <em>{=$row['title']}<span style="display:none;">|(price)</span>
+        </em>
+    </div>
+</div>
+</script>
+<script id="markItem" type="text/html">
+<dd id="i(id)" class="(css)">
+    <a title="(addr)" style="background: rgb(255, 255, 255);">
+        <span class="d1">(m)米</span>
+        <!--span class="d2"><em></em>--</span-->
+        (title)
+    </a>
+</dd>
+</script>
+<script id="markDetail" type="text/html">
+<div class="markDetail">
+    <img src="_thumb" class="_none" />
+    地址：(addr) <br/> 
+    电话：(tel)
+</div>
+</script>
+
+<script id="mark1Piont" type="text/html">
+<div class="mark1" title="(title)" id='p(id)'>
+    <div class="mark1-red">
+        <em>(C)</em>
+    </div>
+</div>
+</script>
+<script id="mark2Piont" type="text/html">
+<div class="mark2" title="(title)" id='p(id)'>
+    <div class="mark2-red">
+    </div>
+</div>
+</script>
+
+
+<?php //dump($row); ?>
+</body></html>
+

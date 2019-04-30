@@ -1,0 +1,144 @@
+<!DOCTYPE html><html><head>
+{code:"suite/_dinit"}
+</head><body>
+
+{inc:"u-inc/ahead"}
+{inc:"u-inc/amenu"}
+
+<div class="row">
+
+  <div class="col-md-7">
+
+      <div class="pic1-play">
+        <div class="ppout">
+          <ul class="ppin_box">
+            <?php $pics=data('album',"lpid='$did'","6"); if(!empty($pics)){ foreach($pics as $row){ ?>
+            <li> <a xhref='#' target="_blank">
+              <img src="{=$row[mpic]}">
+              <span>{=$row[title]}</span>
+            </a> </li>
+            <?php } }?>
+          </ul>
+        </div>
+      </div>
+
+  </div>
+  <div class="col-md-5 dh-base">
+
+      <div>
+        <h1>
+          {title($title,96,$this->vars)}
+        </h1>
+        <p class="tags">
+          {if $sales}<span class="label label-info">{sopt($sales,sale.sales,0,$nul1)}</span>{/if} 
+          {if $hxtype}<span class="label label-info">{sopt($hxtype,fang.hx,0,$nul1)}</span>{/if} 
+          <?=tex('texHouse')->vtags($sotags);?>
+        </p>
+      </div>
+      <div class="row">
+        <ul class="col-md-12">
+            <li class="price">
+              <span class="right">
+                <a href="https://newhouse.fang.com/house/tools.htm" target="_blank">房贷计算器</a>
+              </span>
+              <i>均价：</i>
+               <?=tex('texHouse')->vprcie($price,'元/㎡')?>
+                | 总价：<?=tex('texHouse')->vprcie($pall,'万')?>
+            </li>
+            <li>
+              <i>户型面积：</i>{=$hxs} 
+               | {=$mjout}㎡ 
+            </li>
+            <li>
+              <i>装修朝向：</i>{sopt($zxtype,fang.zx,0,$nul2)}
+               | 朝{sopt($cxtype,fang.cx,0,$nul2)} 
+            </li>
+            <li>
+              <i>产权年份：</i><?=tex('texHouse')->vnian2($cqnian)?>产权 
+               | <?=tex('texHouse')->vnian2($jznian)?>建成
+            </li>
+            <li>
+              <i>楼层梯户：</i>{if $louceng}{=$louceng}{else}<span class='cCCC'>未知楼层</span>{/if}
+               | {if $tihu}{=$tihu}{else}<span class='cCCC'>梯户比</span>{/if}
+            </li>
+
+            <li>
+              <i>建筑类型：</i>{sopt($jztype,fang,0,$nul2)} 
+              <i>建筑结构：</i>{sopt($jzframe,fang,0,$nul2)} 
+            </li>
+            <li>
+              <i>物业类别：</i>{sopt($wytype,fang,0,$nul1)}
+               | 物业费：{=$wyfee}元/㎡·月
+            </li>
+
+            <li>
+              <span class="right">
+                <a href='{surl("sale.$did.a4")}' target="_blank">打印</a>
+              </span>
+              <i>更新：</i>{if $etime}{stime($etime,full)}{else}{stime($atime,full)}{/if}
+            </li>
+
+            <li><i>咨询电话：</i>400-1234-5**8</li>
+            <li class="yixi">
+              <button onclick="omodal()" class="right btn btn-primary btn-sm">
+                  我要
+              </button>
+              <i>意向关注：</i>想看房, 想买房, 想咨询, 想了解
+            </li>
+
+        </ul>
+
+      </div>
+
+      <div class="tips">
+        <p>提示1: 演示资料，不构成任何交易凭证,也不承担相关风险和责任！</p>
+      </div>
+
+  </div>
+
+</div>
+
+{inc:"u-inc/ad-bar1"}
+
+<div class="row">
+  <div class="col-md-9 dtext">
+      <h3 class="dsect">
+        房源简介
+      </h3>
+      <div>
+          <?=tex('texHouse')->vmd($remark);?>
+      </div>
+      <h3 class="dsect">
+        周边配套
+      </h3>
+      <div>
+          <?=tex('texHouse')->vmd($remzb);?>
+      </div>
+      <h3 class="dsect">
+        交通线路
+      </h3>
+      <div>
+          <?=tex('texHouse')->vmd($remjt);?>
+      </div>
+  </div>
+  <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Catalog/类别</div>
+        <div class="panel-body side">
+          {tag:tp=[Type,u][modid,$this->mod][idfix,top]}
+          <li class="type"><a href='{surl($this->mod."--list")}&stype={=$t_kid}' {if $t_kid==$this->key}class='act'{/if}>{title($t_title,32,$u)}</a></li>
+          {/tag:tp}
+        </div>
+      </div>
+  </div>
+</div>
+
+{inc:"suite/_modal"}
+
+<script>
+  $('.ppin_box').picView({box:'picvbox', css:'picvcss'});
+  $(".ppout").picPlay({});
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

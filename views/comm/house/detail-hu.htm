@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head>
+{code:"house/_dinit"}
+</head><body>
+  
+<!--{inc:"u-inc/ahead"}-->
+{inc:"house/_dmenu"}
+
+<div class="row">
+  <div class="col-md-9">
+
+    <div class="sobar" id="sobar">
+      <p>
+        <b>户型筛选</b> <span id="sohxs">
+            <?php for($i=1;$i<6;$i++){ ?>
+            <a href="#" id='pnav_{=$i}' onclick="vpart({=$i})">{=$i}室</a>
+            <?php } ?>
+            <a href="#" id='pnav_50' onclick="vpart(50)">其它</a>
+            <a href="#" id='pnav_0'  onclick="vpart(0)">[全部]</a>
+        </span>
+      </p>
+      
+    </div>
+
+    <!--list_start  -->
+    <div class="row list-table">
+      {tag:dlist=[List][modid,huxing][where,$whrp][limit,999]}
+      {:row}
+      <div class="col-md-3 pitm vitms_{if $t_hxroom>0 && $t_hxroom<=5}{=$t_hxroom}{else}50{/if}">
+        <p class="tc picbox uimark-pos-rel">
+        <img src="{spic($t_mpic,demo_nop300x200.jpg)}" width='160' height='120' class="img-thumbnail" onload='imgShow(this,160,120)' />
+        {if !empty($t_hinfo)}<b class="uimark-star-icon1b"></b>{/if}</p>
+
+        <p class="title"><a href='{surl($this->mod.".$t_did")}'>{title($t_title,96,$v)}</a></p>
+        <p class="tc">
+          <i>
+            {if $t_hxroom}{=$t_hxroom}室
+            {else}
+            <b class="c999">---</b>
+            {/if}
+          </i>
+          <b class="cCCC">-</b>
+          <i>建面{=$t_mjout}㎡</i>
+        </p>
+      </div> 
+      {/row}
+
+      {/tag:dlist}
+    </div> 
+
+  </div>
+  {inc:"house/_dside"}
+</div>
+
+
+<script>
+
+$('#sobar a').each(function(i,e){
+    var no = $(this).prop('id').replace('pnav_','');
+    if(no!='0'){
+        if($('.list-table .vitms_'+no).length==0){
+            $(e).hide();
+        }
+    }
+});
+
+var pp = null;
+function vpart(no){
+  if(!no){
+    $('.list-table .pitm').show();
+    pp = $('.list-table').picView({box:'picvbox', css:'picvcss'}); 
+  }else{
+    $('.list-table .pitm').hide();
+    $('.list-table .vitms_'+no).show();
+    pp = $('.list-table .vitms_'+no).picView({box:'picvbox', css:'picvcss'}); 
+  }
+  $('#sobar a').removeClass('act');
+  $('#pnav_'+no).addClass('act');
+}
+vpart(0);
+
+_cbase.jsrun.menuid = '{=$this->view}';
+
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

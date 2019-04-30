@@ -1,0 +1,206 @@
+<!DOCTYPE html><html><head>
+{code:"house/_dinit"}
+</head><body>
+
+<!--{`inc:"u-inc/ahead"`}-->
+{inc:"house/_dmenu"}
+
+<div class="row">
+  <div class="col-md-6 dh-base">
+
+      <div>
+        <i class="right">
+        状态: <b class="label label-info">{sopt($sales,fang,0,$nul1)}</b><br>
+        {if $etime}{stime($etime)}{else}{stime($atime)}{/if}
+        </i>
+        <h1>
+          {title($title,0,$this->vars)}
+        </h1>
+        <p class="tags">
+          <?=tex('texHouse')->vtags($sotags);?>
+        </p>
+      </div>
+      <div class="row">
+        <ul class="col-md-12">
+            <li class="price">
+              <span class="right">
+                <a href="https://newhouse.fang.com/house/tools.htm" target="_blank">房贷计算器</a>
+              </span>
+              <i>均价：</i>
+              <?=tex('texHouse')->vprcie($price,$punit)?>
+            </li>
+            <li><i>物业类别：</i>{sopt($wytype,fang,0,$nul2)}</li>
+            <li><i>主力户型：</i>
+              <?php $whx="hxroom>0"; ?>
+              {tag:dlist=[List][modid,huxing][where,$whx][limit,3]}
+              <a href='{surl($this->mod.".$did.hu")}#{=$t_did}'>{=$t_hxroom}室/{=$t_mjout}㎡</a>, 
+              {/tag:dlist}
+            </li>
+            <li><i>开 发 商：</i>{if !empty($dev)}{=$dev}{else}{=$nul2}{/if}</li>
+            <li><i>{=$tpname}地址：</i>{=$addr}</li>
+            <li>
+              <i>建筑类型：</i>{sopt($jztype,fang,0,$nul2)} &nbsp; 
+              <i>建筑结构：</i>{sopt($jzframe,fang,0,$nul2)} &nbsp; 
+            </li>
+            <li>
+              <i>建筑年代：</i><?=tex('texHouse')->vnian2($jznian)?> &nbsp; 
+              <i>产权年限：</i><?=tex('texHouse')->vnian2($cqnian)?> &nbsp; 
+            </li>
+
+            <li><i>咨询电话：</i>400-1234-5**8</li>
+            <li class="yixi">
+              <button onclick="omodal()" class="right btn btn-primary btn-sm">
+                  我要
+              </button>
+              <i>意向关注：</i>价格变动, 开盘预告, 楼盘动态, 看房团
+            </li>
+
+        </ul>
+
+      </div>
+
+      <div class="tips">
+        <p>提示1: 演示资料，不构成任何交易凭证,也不承担相关风险和责任！</p>
+        <p>提示2: 需要更多内容丰富楼盘，可后台添加字段，再来调用！</p>
+      </div>
+
+  </div>
+  <div class="col-md-6">
+
+      <div class="pic1-play">
+        <div class="ppout">
+          <ul class="ppin_box">
+            <?php $pics=data('album',"lpid='$did'","6"); if(!empty($pics)){ foreach($pics as $row){ ?>
+            <li> <a href='{surl("house.$did.tu")}' target="_blank">
+              <img src="{=$row[mpic]}">
+              <span>{=$row[title]}</span>
+            </a> </li>
+            <?php } }?>
+          </ul>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+{inc:"u-inc/ad-bar1"}
+
+<div class="row">
+  <div class="col-md-9 dh-news">
+
+      <h3 class="dsect">
+        <a class="right fS1" href='{surl("house.$did.news")}'>更多</a>
+        {=$title} {=$tpname}动态
+      </h3>
+      <ul>
+          {tag:tp=[List][modid,hnews][limit,2][where,$whrp]}
+          <li>
+            <p class="title">
+              <i class="right cCCC">{stime($etime)}</i>
+              [{sopt($t_catid,hnews,0,$nul1)}]
+              <a href='{surl("house.$did.news")}#{=$t_did}'>{title($t_title,32,$v)}</a>
+            </p>
+            <p class="detail">  
+              {text($t_remark,240)} <a href='{surl("house.$did.news")}#{=$t_did}'>阅读全文&gt;</a>
+            </p>
+          </li>
+          {/tag:tp}
+      </ul>
+
+      <h3 class="dsect">
+        <a class="right fS1" href='{surl("house.$did.hu")}'>更多</a>
+        {=$title} {=$tpname}户型
+      </h3>
+      <div class="row list-table">
+        {tag:dlist=[List][modid,huxing][where,$whrp][limit,4]}
+        {:row}
+        <div class="col-md-3 pitm">
+          <p class="tc picbox uimark-pos-rel">
+          <img src="{spic($t_mpic,demo_nop300x200.jpg)}" width='160' height='120' class="img-thumbnail" onload='imgShow(this,160,120)' />
+          {if !empty($t_hinfo)}<b class="uimark-star-icon1b"></b>{/if}</p>
+          <p class="title"><a href='{surl($this->mod.".$t_did")}'>{title($t_title,96,$v)}</a></p>
+          <p class="tc">
+            <i>
+              {if $t_hxroom}{=$t_hxroom}室
+              {else}
+              <b class="c999">---</b>
+              {/if}
+            </i>
+            <b class="cCCC">-</b>
+            <i>建面{=$t_mjout}㎡</i>
+          </p>
+        </div> 
+        {/row}
+        {/tag:dlist}
+      </div> 
+
+  </div>
+  {inc:"house/_dside"}
+</div>
+
+<div class="row" id="pmap">
+  <div class="col-md-12">
+      <iframe id='map' src="{surl(0)}?map&did={=$did}&w=1140" frameborder="0" width="100%" scrolling="no"></iframe>
+  </div>
+</div>
+
+{inc:"u-inc/ad-bar2"}
+
+<div class="row dh-fys">
+<div class="col-md-6">
+    <h3 class="dsect">
+      <a class="right fS1" href='{surl("house.$did.cs")}'>更多</a>
+      {=$title} 的出售房 
+    </h3>
+    <ul>
+      {tag:dls=[List][modid,sale][where,$whrp][limit,5]}
+      <li>
+        <i class="right">
+          {if $t_mjout}{=$t_mjout}㎡{else}<span class='cCCC'>未知㎡</span>{/if}, 
+          {if $t_pall}{=$t_pall}万{else}<span class='cCCC'>面议</span>{/if}
+        </i>
+        <a href='{surl("sale.$t_did")}'>{title($t_title,96,$v)}</a>
+      </li>
+      {/tag:dls}
+    </ul>
+</div>
+<div class="col-md-6">
+    <h3 class="dsect">
+      <a class="right fS1" href='{surl("house.$did.cz")}'>更多</a>
+      {=$title} 的出租房
+    </h3>
+    <ul>
+      {tag:dlr=[List][modid,rent][where,$whrp][limit,5]}
+      <li>
+        <i class="right">
+          {if $t_mjout}{=$t_mjout}㎡{else}<span class='cCCC'>未知㎡</span>{/if}, 
+          {if $price}{=$price}元/月{else}<span class='cCCC'>面议</span>{/if}
+        </i>
+        <a href='{surl("rent.$t_did")}'>{title($t_title,96,$v)}</a>
+      </li>
+      {/tag:dlr}
+    </ul>
+</div>
+</div>
+
+{inc:"suite/_modal"}
+
+<script>
+  var url1 = '{surl(0)}?map&did={=$did}&w=', // 1140
+      url2 = '{surl(base:0)}?info-map-baidu&point={=$map}&title={=$title}',
+      wbox = winSize();
+  if(wbox.w>=995){
+      var pbox = jeSize('pmap'); 
+      $('#map').height(400);
+      $('#map').prop('src',url1+(pbox.width-30));
+  }else{
+      $('#map').height(parseInt(wbox.h*2/3));
+      $('#map').prop('src',url2);
+  }
+  //$('#imgp').picView({box:'picvbox', css:'picvcss'});
+  $(".ppout").picPlay({});
+  _cbase.jsrun.menuid = 'home';
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html><html><head>
+{code:"house/_dinit"}
+</head><body>
+
+<!--{inc:"u-inc/ahead"}-->
+{inc:"house/_dmenu"}
+
+<div class="row">
+  <div class="col-md-9 dmore">
+
+    <h3 class="dsect">{=$title} 基本信息</h3>
+    <div class="row">
+      <ul class="col-md-6">
+          <li><i>物业类别：</i>{sopt($wytype,fang,0,$nul2)}</li>
+          <li><i>建筑类型：</i>{sopt($jztype,fang,0,$nul2)} / {sopt($jzframe,fang,0,$nul2)}</li>
+          <li><i>开 发 商：</i>{=$dev}</li>
+          <li><i>楼盘地址：</i>{=$addr}</li>
+      </ul>
+      <ul class="col-md-6">
+          <li><i>装修状况：</i>{sopt($zxtype,fang.zx,0,$nul2)}</li>
+          <li><i>建筑年代：</i><?=tex('texHouse')->vnian2($jznian)?>建成</li>
+          <li><i>项目特色：</i>{=$sotags}</li>
+      </ul>
+    </div>
+
+    <h3 class="dsect">销售信息</h3>
+    <div class="row">
+      <ul class="col-md-6">
+          <li><i>销售状态：</i>{sopt($sales,house.sales,0,$nul1)}</li>
+          <li><i>销售电话：</i>400-1234-5**8</li>
+          <li><i>售楼地址：</i>---(可后台添加字段)</li>
+      </ul>
+      <ul class="col-md-6">
+          <li><i>参考均价：</i><?=tex('texHouse')->vprcie($price,$punit)?></li>
+          <li><i>主力户型：</i>
+              <?php $whx="hxroom>0"; ?>
+              {tag:dlist=[List][modid,huxing][where,$whx][limit,3]}
+              <a href='{surl($this->mod.".$did.hu")}#{=$t_did}'>{=$t_hxroom}室/{=$t_mjout}㎡</a>, 
+              {/tag:dlist}
+          </li>
+          <li><i>产权年限：</i><?=tex('texHouse')->vnian2($cqnian)?></li>
+      </ul>
+    </div>
+
+    <h3 class="dsect">小区规划</h3>
+    <div class="row">
+      <ul class="col-md-6">
+          <li><i>物 业 费：</i>{=$wyfee} 元/㎡·月</li>
+          <li><i>物业公司：</i>{=$wycorp}</li>
+      </ul>
+      <ul class="col-md-6">
+          <li><i>楼栋/户数：</i>{=$cntld} / {=$cnthu}</li>
+          <li><i>出售/出租：</i>{=$cntcz} / {=$cntcs}</li>
+      </ul>
+    </div>
+
+    <h3 class="dsect">楼盘简介</h3>
+    <div class="dtext">
+      <?=tex('texHouse')->vmd($remark);?>
+    </div>
+
+    <h3 class="dsect">周边配套</h3>
+    <div class="dtext">
+      <?=tex('texHouse')->vmd($remzb);?>
+    </div>
+
+    <h3 class="dsect">交通线路</h3>
+    <div class="dtext">
+      <?=tex('texHouse')->vmd($remjt);?>
+    </div>
+
+  </div>
+  {inc:"house/_dside"}
+</div>
+
+
+<script>
+  $(".ppout").picPlay({});
+  _cbase.jsrun.menuid = '{=$this->view}';
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

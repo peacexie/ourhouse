@@ -1,0 +1,48 @@
+<?php
+
+$rows = [];
+$db = db();
+
+$type = req('type'); // demo
+$whr = "map>'0'";
+
+$list = $db->table('docs_house')->where($whr)->order('did DESC')->limit(30)->select();
+if($list){
+    foreach($list as $ik=>$iv){
+        $pnts = explode(',', $iv['map']);
+        $pnta = ['lng'=>$pnts[0], 'lat'=>$pnts[1]];
+        $ir = [
+            'title'=>$iv['title'], 'point'=>$pnta, 
+            'address'=>$iv['addr'], 'url'=>"?house.{$iv['did']}", 
+            'phoneNumber'=>"0764-7788 9900",
+            'thumb'=>comStore::revSaveDir($iv['mpic']),
+        ];
+        $rows[] = $ir;
+    }
+}
+
+if(!empty($rows)){
+    $data = json_encode($rows,JSON_UNESCAPED_UNICODE);
+}else{
+    $data = file_get_contents(DIR_VIEWS.'/comm/map/lib/data.json');
+    $uresp = str_replace('/', "\\/", PATH_URES);
+    $data = str_replace('{uresroot}', $uresp, $data);
+}
+
+glbHtml::head('json');
+die($data);
+
+/*
+    title:"甲壳虫之家",
+    point:{
+        lng:113.853012955,
+        lat:23.0145541594
+    },
+    address:"寮步镇寮城中路国际汽车城",
+    url:"/house/home/id/426.html",
+    phoneNumber:"0769-8111 8999",
+    thumb:"newhouse_hx/images/200892192422.jpg#240#180",
+    "_end":1
+*/
+
+?>

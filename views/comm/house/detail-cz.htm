@@ -1,0 +1,67 @@
+<!DOCTYPE html><html><head>
+{code:"house/_dinit"}
+</head><body>
+  
+<!--{inc:"u-inc/ahead"}-->
+{inc:"house/_dmenu"}
+
+<div class="row">
+  <div class="col-md-9">
+      <h3 class="dsect">
+        <a class="right fS1" href='{surl("house.$did")}'>楼盘首页</a>
+        {=$title} {=$tpname} 的出租房
+      </h3>
+
+        <ul class="fy-table">
+          {tag:dlist=[Page][modid,rent][where,$whri][order,0,click+price][limit,12]}
+          {:row}
+          <li class="">
+            <div class="price hidden-xs">
+                  <?=tex('texHouse')->vprcie($t_price,'元/月')?>
+                  <br>
+                  面积:{=$t_mjout}㎡ 
+            </div>
+            <div class="mpic uimark-pos-rel"><a href='{surl("rent.$t_did")}'>
+              {if !empty($t_cntpic)}<span class='label label-default uimark-pos-abs'>{=$t_cntpic}图</span>{/if}
+              <img src="{spic($t_mpic,demo_nop300x200.jpg)}" width='200' height='160' class="img-thumbnail" onload='imgShow(this,200,160)' /> 
+            </a></div>
+            <div class="detail">
+              <p class="title"><a href='{surl("rent.$t_did")}'>{title($t_title,96,$v)}</a></p>
+              <p>
+                <?=mb_substr($t_hxs,0,4)?> | {=$t_mjout}㎡ | {=$t_louceng} | 朝{sopt($t_cxtype,fang.cx,0,$nul2)} | <?=tex('texHouse')->vnian2($t_jznian)?>
+              </p>
+              <p><?php
+                $lp = exaHouse::getLprow($t_lpid);
+                if(!empty($lp)){ echo $lp['lparea'].' / '; echo $lp['lplink']; }
+              ?></p>
+              <p>
+                <span class="price visible-xs-inline">
+                  <?=tex('texHouse')->vprcie($t_price,'元/月')?>,
+                  面积:{=$t_mjout}㎡ 
+                </span>
+                {if $t_zutype}<span class="label label-info">{sopt($t_zutype,rent.zutype,0,$nul1)}</span>{/if} 
+                {if $t_hxtype}<span class="label label-info">{sopt($t_hxtype,fang.hx,0,$nul1)}</span>{/if}
+                <?=tex('texHouse')->vtags($t_sotags);?>
+              </p>
+            </div>
+          </li> 
+          {/row}
+            <div colspan="{=$col}" class="clear pa5">
+            {php echo $_cbase['page']['bar']; }
+            </div>
+          {/tag:dlist}
+        </ul>
+
+      <div class="clear"></div>
+  </div>
+  {inc:"house/_dside"}
+</div>
+
+
+<script>
+  //$('.list-table').picView({box:'picvbox', css:'picvcss'});
+  _cbase.jsrun.menuid = '{=$this->view}';
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

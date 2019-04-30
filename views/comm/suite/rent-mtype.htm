@@ -1,0 +1,115 @@
+<!DOCTYPE html><html><head>
+{code:"suite/_soinit"}
+<script src="{=PATH_BASE}?ajax-comjs&act=jsTypes:rent,local,fang;"></script> 
+</head><body>
+{inc:"u-inc/ahead"}
+{inc:"u-inc/amenu"}
+
+<div class="row">
+  <div class="col-md-9">
+    <!--main_start-->
+
+    <div class="sobar" id="sobar">
+      <p><b>县区</b> <span id="solocal1"></span></p>
+      {if $apid}
+      <p><b>乡镇</b> <span id="solocal2"></span></p>
+      {/if}
+      <p><b>月租</b> <span id="soprice"></span></p>
+      <p><b>面积</b> <span id="somjout"></span></p>
+
+      <p class="inblock right"><b>类型</b> <span id="socatid"></span></p>
+      <p class="inblock"><b>户型</b> <span id="sohx"></span></p>
+      
+    </div>
+
+    <div class="sobar soline"> 
+      <p class="order">
+       <i id="so_def"></i>
+       <i id="so_click"></i>
+       <i id="so_salse"></i>
+      </p>
+      <p class="sokeys" id="sokeys">
+        <span class="hidden-xs">找到</span> <i class="js_allrec">(0)</i> 
+        条<span class="hidden-xs">纪录</span>
+        <a href="{surl(rent-lp)}" class="soclear" id="soclear">清除条件</a>
+      </p>
+    </div>
+
+    <div class="h10">&nbsp;</div>
+    <!--list_start-->
+    <ul class="fy-table">
+      {tag:dlist=[Page][modid,$this->mod][stype][where,$whr][order,0,click+price][limit,12]}
+      {:row}
+      <li class="">
+        <div class="price hidden-xs">
+              <?=tex('texHouse')->vprcie($t_price,'元/月')?>
+              <br>
+              面积:{=$t_mjout}㎡ 
+        </div>
+        <div class="mpic uimark-pos-rel"><a href='{surl($this->mod.".$t_did")}'>
+          {if !empty($t_cntpic)}<span class='label label-default uimark-pos-abs'>{=$t_cntpic}图</span>{/if}
+          <img src="{spic($t_mpic,demo_nop300x200.jpg)}" width='200' height='160' class="img-thumbnail" onload='imgShow(this,200,160)' /> 
+        </a></div>
+        <div class="detail">
+          <p class="title"><a href='{surl($this->mod.".$t_did")}'>{title($t_title,96,$v)}</a></p>
+          <p>
+            <?=mb_substr($t_hxs,0,4)?> | {=$t_mjout}㎡ | {=$t_louceng} | 朝{sopt($t_cxtype,fang.cx,0,$nul2)} | <?=tex('texHouse')->vnian2($t_jznian)?>
+          </p>
+          <p><?php
+            $lp = exaHouse::getLprow($t_lpid);
+            if(!empty($lp)){ echo $lp['lparea'].' / '; echo $lp['lplink']; }
+          ?></p>
+          <p>
+            <span class="price visible-xs-inline">
+              <?=tex('texHouse')->vprcie($t_price,'元/月')?>,
+              面积:{=$t_mjout}㎡ 
+            </span>
+            {if $t_zutype}<span class="label label-info">{sopt($t_zutype,rent.zutype,0,$nul1)}</span>{/if} 
+            {if $t_hxtype}<span class="label label-info">{sopt($t_hxtype,fang.hx,0,$nul1)}</span>{/if}
+            <?=tex('texHouse')->vtags($t_sotags);?>
+          </p>
+        </div>
+      </li> 
+      {/row}
+        <div colspan="{=$col}" class="clear pa5">
+        {php echo $_cbase['page']['bar']; }
+        </div>
+      {/tag:dlist}
+    </ul>  
+    <!--list_end-->
+
+    <!--main_end-->
+  </div>
+  {inc:"suite/_side"}
+</div>
+
+<script>
+
+var s,linktpl = "<a href='(url)' class='(act)'>(title)</a>"; 
+sordb_init('rent', 'lp', 0, '', linktpl);
+var atype = sordb_cfgs.slay.split(','), amtype = atype.length>=0 ? atype[0] : '(null)'; 
+
+s = sordb_extype(0,'local-0','act'); $('#solocal1').html(s);
+<?php if($apid){ ?>
+s = sordb_extype(0,'local-<?=$apid?>','act'); $('#solocal2').html(s);
+if($('#solocal2').find('a').length<2) $('#solocal2').parent().hide(); 
+<?php } ?>
+
+s = sordb_area(0,'price:300,500,800,1000,1500,2000,2500:元','act'); $('#soprice').html(s);
+s = sordb_area(0,'mjout:50,70,90,110,130,150,200,300:㎡','act'); $('#somjout').html(s);
+arr = ["1=1室", "2=2室", "3=3室", "4=4室", "5=5室", "50=5室以上"];
+s = sordb_links(0,'hxroom','act',undefined,arr,urlPara('hxroom','')); $('#sohx').html(s);
+
+s = sordb_extype(0,'rent-0','act',undefined,'stype'); $('#socatid').html(s);
+
+s = sordb_ordby(0,'默认','','def-act,def,(def)'); $('#so_def').html(s);
+s = sordb_ordby(0,'点击','click','oasc,odesc,ondesc,'); $('#so_click').html(s);
+s = sordb_ordby(0,'总价','price','oasc,odesc,onasc,1'); $('#so_salse').html(s); 
+
+$('.js_allrec').html($('.pg_total').text());
+sordb_hideClear('soclear');
+
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

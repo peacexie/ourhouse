@@ -1,0 +1,44 @@
+<!DOCTYPE html><html><head>
+{code:"house/_dinit"}
+</head><body>
+  
+<!--{inc:"u-inc/ahead"}-->
+{inc:"house/_dmenu"}
+
+<div class="row">
+  <div class="col-md-9 dh-news">
+      <h3 class="dsect">
+        <a class="right fS1" href='{surl("house.$did")}'>楼盘首页</a>
+        {=$title} {=$tpname}动态
+      </h3>
+      {tag:tp=[Page][modid,hnews][limit,10][where,$whrp]}
+      <ul>
+          {:row}
+          <li>
+            <p class="title">
+              <i class="right cCCC">{stime($etime)}</i>
+              [{sopt($t_catid,hnews,0,$nul1)}]
+              <a xhref="{surl("house.$did.$t_did")}">{title($t_title,96,$v)}</a>
+            </p>
+            <p class="detail">  
+              {text($t_remark,2400)} 
+            </p>
+          </li>
+          {/row}
+      </ul>
+      <div class="clear"></div>
+      {php echo $_cbase['page']['bar']; }
+      {/tag:tp}
+      <div class="clear"></div>
+  </div>
+  {inc:"house/_dside"}
+</div>
+
+
+<script>
+  //$('.list-table').picView({box:'picvbox', css:'picvcss'});
+  _cbase.jsrun.menuid = '{=$this->view}';
+</script>
+
+{inc:"u-inc/afoot"}
+</body></html>

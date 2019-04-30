@@ -1,0 +1,48 @@
+<!DOCTYPE html><html><head>
+{code:"suite/_a4init"}
+</head><body>
+<div class="a4">
+
+<p class="p1">{=$lp['title']}</p>
+<p class="">{=$hxs}</p>
+<p class="pr">
+  <b>{=$mjout}</b>㎡ 
+  [租] 
+  <?=tex('texHouse')->vprcie($price,'元/月')?>
+</p>
+
+<p class="">
+  <img src="{surl(base:0)}?ajax-vimg&mod=qrShow&data={=$urlqr}" />
+</p>
+
+<p class="tag">
+  {sopt($zxtype,fang.zx,0,$nul2)}
+  | <?=tex('texHouse')->vnian2($jznian)?> | 
+  {sopt($zutype,rent.zutype,0,$nul2)}
+</p>
+<p class="tag">
+  <?=tex('texHouse')->vtags($sotags);?>
+</p>
+
+<p class="">
+  <img src="{spic($mpic,demo_nop300x200.jpg)}" height="360"/> 
+</p>
+
+<p class="pn">
+  <a class="print">&lt; 打印</a>
+  &nbsp; | &nbsp;
+  <a class="detail">详情 &gt;</a>
+</p>
+
+</div>
+<script>
+$('a.print').click(function(){
+  $('p.pn').hide();
+  window.print();
+});
+$('a.detail').click(function(){
+  $(this).prop('href','{surl("rent.$did")}');
+});
+</script>
+<div class="clear"></div>
+</body></html>

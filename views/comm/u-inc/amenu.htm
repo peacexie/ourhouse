@@ -1,0 +1,69 @@
+
+<?php
+$user = usrBase::userObj('Member'); 
+$uname = $user->usess['uname'];
+$uname = empty($uname) ? 'Guest' : basStr::cutWidth($uname,12);
+$isup = usrPerm::issup();
+?>
+
+  <nav class="navbar navbar-default"><!--default,inverse-->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{surl(0)}">{=$_cbase['sys_name']}</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+
+          <li id="idf_house"><a href="{surl(house-lp)}">楼盘</a></li>
+          <li id="idf_sale"><a href="{surl(sale)}">二手房</a></li>
+          <li id="idf_rent"><a href="{surl(rent)}">出租房</a></li>
+          <li id="idf_news"><a href="{surl(news)}">资讯</a></li>
+          <li id="idf_topic"><a href="{surl(topic)}">专题</a></li>
+          <li id="idf_faqs"><a href="{surl(faqs)}">问答</a></li>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="fa fa-users"></span> 会员 <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li id="idf_inmem"><a href="#{surl(inmem)}">经纪人</a></li>
+              <li role="separator" class="divider"></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="fa fa-user-circle"></span> {=$uname} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li id="idf_shopcar"><a href="{surl(0)}">测试<span id="top_scnt"></span></a></li>
+              {if $user->userFlag=='Login'} 
+              <li id="idf_logout"><a href="{surl(umc:0)}?uio-logout&recbk=ref">[登出]</a></li>
+              <li id="idf_umc"><a href="{surl(umc:0)}">[会员中心]</a></li>
+              {else}
+              <li role="separator" class="divider"></li>
+              <li id="idf_login"><a href="{surl(umc:0)}">[登录]</a></li>
+              <li id="idf_apply"><a href="{surl(umc:reg)}">[注册]</a></li>
+              {/if}
+              {if $isup}
+              <li role="separator" class="divider"></li>
+              <li id="idf_login"><a class="cF0F" href="{surl(adm:0)}?logout&recbk=ref" target="_blank" title="登出超管">登出:Admin</a></li>
+              {/if}
+            </ul>
+          </li>
+
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
