@@ -1,0 +1,1313 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name='viewport' content='width=device-width,minimum-scale=1.0'>
+<title>优优好房(Html)文档</title>
+<style type="text/css">
+body{ line-height:150%; }
+p { padding:10px; margin:0px auto; }
+table { margin:auto; clear:all; }
+td { padding:3px; vertical-align:top; }
+h1, h2 { max-width:620px; margin:30px auto 10px auto; }
+a:link, a:visited { text-decoration: none; }
+a:hover { text-decoration: underline; }
+.out { max-width:620px; }
+.nav { max-width:420px; }
+.in{ width:80%; }
+@media only screen and (max-width:430px) {
+    td{ word-break: break-all; }
+    .in{ width:100%; }
+    .in td { padding:1px; }
+}
+.r{ float:right; }
+</style>
+</head>
+
+<body>
+<h1 align="center">优优好房(Html)文档</h1>
+<p class="nav">
+    <a href="#_Toc24762">0、优优好房接口:文档说明</a><br>
+    <a href="#_Toc30000">1、优优好房获取出售房源列表接口</a><br>
+    <a href="#_Toc84588"  >2、优优好房获取出租房源列表接口</a><br>
+    <a href="#_Toc30957">3、优优好房获取公司信息接口</a><br>
+    <a href="#_Toc28889">4、优优好房获取用户信息接口</a><br>
+    <a href="#_Toc5277" >5、优优好房获取分店信息接口</a>
+    <i class="r">Marlin@2018-07@永州</i>
+</p>
+
+<h2><a name="_Toc24762">0</a>、优优好房接口:文档说明</h2>
+<table class="out" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+        <td><p>优优好房，为成都`好房通`科技股份有限公司的旗下房产中介系统，此接口文档仅用于旗下合作门店。</p>
+            <p>服务器通过COMP_NO及SYNC_VERIFYID（请妥善保管）进行身份验证，如需要开通数据同步功能，请联系优优好房客服。 </p>
+            <p>每个接口访问频率不可低于3分钟/次，间隔期间接口将会被锁定，因此请勿使用多线程同步模式，鉴于方便用户的开发和调试方便，可以联系客服开放1周的开发时间，期间服务器不会针对接口执行锁定(锁定时返回值如下：{&quot;DATA&quot;:[],&quot;ERRCODE&quot;:&quot;1&quot;,&quot;ERRMSG&quot;:&quot;LOCK_TIME:123ms&quot;,&quot;SERVER_TIME&quot;:&quot;2015-07-23    14:44:24.58&quot;,&quot;TOTAL&quot;:&quot;0&quot;})</p>
+            <p>房源列表每次返回服务器端计算后的一个时间段的数据，因此每次返回的数据量根据时间段内数据量的不同而不同（最多50条，超过部分服务器端自动分页,由于算法自身缺陷可能会出现返回0条的情况，请忽略继续执行），服务器通过时间游标指定同步的时间节点，保障数据的完整性，用户也可指定游标的初始时间节点（服务器端会自动记录时间节点，除非重新初始化，请勿人为指定），如有疑问请联系客服。 </p>
+            <p>示例(请替换参数值)： <br>{root} = `http://user.haofang.net/hftWebService/web/openApi/data`
+            </p>
+            <p>获取出售出售房源列表数据 <br>
+            {root}/getSaleList? COMP_NO=***&amp;SYNC_VERIFYID=***</p>
+            <p>指定重新获取上一次数据（当系统超时，或者解析错误时） <br>
+            {root}/getSaleList? COMP_NO=***&amp;SYNC_VERIFYID=***&amp;RECENT_FLAG=1</p>
+            <p>指定初始更新时间节点(初始时间为2015-01-01)<br>
+            {root}/getSaleList? COMP_NO=***&amp;SYNC_VERIFYID=***&amp;LAST_TIME_SALE=2015-01-01 </p></td>
+    </tr>
+</table>
+<h2><a name="_Toc30000">1</a>、优优好房获取出售房源列表接口</h2>
+<table class="out" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+        <td colspan="3">访问地址 </td>
+    </tr>
+    <tr>
+        <td colspan="3">{root}/getSaleList</td>
+    </tr>
+    <tr>
+        <td width="102">参数 </td>
+        <td width="77">必须 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td>COMP_NO</td>
+        <td>是 </td>
+        <td>公司编号 </td>
+    </tr>
+    <tr>
+        <td>SYNC_VERIFYID</td>
+        <td>是 </td>
+        <td>公司唯一检验码（请谨慎保管） </td>
+    </tr>
+    <tr>
+        <td>LAST_TIME_SALE</td>
+        <td>否 </td>
+        <td>指定更新时间节点 </td>
+    </tr>
+    <tr>
+        <td>RECENT_FLAG</td>
+        <td>否 </td>
+        <td>指定是否重新获取  0 否 1 是 </td>
+    </tr>
+    <tr>
+        <td colspan="3">返回值 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DATA</td>
+        <td>数据集 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRCODE</td>
+        <td>错误编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRMSG</td>
+        <td>错误信息 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LAST_TIME_SALE</td>
+        <td>本次更新时间节点 </td>
+    </tr>
+    <tr>
+        <td colspan="2">NEXT_TIME_SALE</td>
+        <td>下次更新时间节点 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SERVER_TIME</td>
+        <td>系统时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TOTAL</td>
+        <td>总数 </td>
+    </tr>
+    <tr>
+        <td colspan="3">数据集 </td>
+    </tr>
+    <tr>
+        <td colspan="2">参数 </td>
+        <td>释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">BUILD_CODE</td>
+        <td>楼盘检索码 </td>
+    </tr>
+    <tr>
+        <td colspan="2">BUILD_ID</td>
+        <td>楼盘ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">BUILD_NAME</td>
+        <td>楼盘名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_ID</td>
+        <td>门店ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">EXPLRTH_DATETIME</td>
+        <td>房勘日期 </td>
+    </tr>
+    <tr>
+        <td colspan="2">GARAGE_AMOUNT</td>
+        <td>车位数量 </td>
+    </tr>
+    <tr>
+        <td colspan="2">GARDEN_AREA</td>
+        <td>花园面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">HALL_STRUCTURE</td>
+        <td>厅结构 </td>
+    </tr>
+    <tr>
+        <td colspan="2">IS_SEPERATOR</td>
+        <td>是否可分割（1：是  0：否） </td>
+    </tr>
+    <tr>
+        <td colspan="2">OFFICE_LEVEL</td>
+        <td>写字楼级别 </td>
+    </tr>
+    <tr>
+        <td colspan="2">PHOTO_ARRAY</td>
+        <td>房源图片数组 
+            <table border="1" cellpadding="0" cellspacing="0" class="in">
+                <tr>
+                    <td>参数 </td>
+                    <td>释意 </td>
+                </tr>
+                <tr>
+                    <td>IS_TOP</td>
+                    <td>首图标记 </td>
+                </tr>
+                <tr>
+                    <td>PHOTO_ID</td>
+                    <td>图片ID</td>
+                </tr>
+                <tr>
+                    <td>PHOTO_SEQ</td>
+                    <td>图片排序字段 </td>
+                </tr>
+                <tr>
+                    <td>PHOTO_ADDR</td>
+                    <td>图片地址 </td>
+                </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td colspan="2">REGION_NAME</td>
+        <td>行政区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">RICH_TEXT</td>
+        <td>富文本 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_AREA</td>
+        <td>建筑面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_CHARACT</td>
+        <td>配套及特色 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_DIRECT</td>
+        <td>房源朝向 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_DOORS</td>
+        <td>几户 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_EXPLRTH</td>
+        <td>房勘（1：已勘  0：未勘） </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_FITMENT</td>
+        <td>装修 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_FLOOR</td>
+        <td>所在楼层 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_FLOORS</td>
+        <td>总楼层 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_HALL</td>
+        <td>几厅 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_ID</td>
+        <td>房源ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_INNERAREA</td>
+        <td>套内面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_LADDER</td>
+        <td>几梯 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_LEAVE_TIME</td>
+        <td>腾房日 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_MAP</td>
+        <td>图片张数 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_MEMO</td>
+        <td>内部备注 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_MORTGAGE</td>
+        <td>现状(按揭)</td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_NO</td>
+        <td>房源编码 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_PROPERTY</td>
+        <td>物业费 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_PUBLISH</td>
+        <td>是否发布（1：是  0：否） </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_REG</td>
+        <td>行政区ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_RIGHT</td>
+        <td>产权 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_ROOM</td>
+        <td>几房 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_ROUND</td>
+        <td>环域 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_STATUS</td>
+        <td><table border="1" cellpadding="0" cellspacing="0" class="in">
+            <tr>
+                <td>1</td>
+                <td>有效 </td>
+                <td>7</td>
+                <td>注销 </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>封盘 </td>
+                <td>101</td>
+                <td>转售 </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>暂缓 </td>
+                <td>102</td>
+                <td>转租 </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>预订 </td>
+                <td>103</td>
+                <td>转有效 </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>内成交 </td>
+                <td>104</td>
+                <td>转私盘 </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>外成交 </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_STREET</td>
+        <td>是否邻街（1：是  0：否） </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_STRUCT</td>
+        <td>房屋结构 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_SUBJECT</td>
+        <td>房源标题 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_TOTAL_PRICE</td>
+        <td>售价 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_TYPE</td>
+        <td>房源类型 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_UNIT_PRICE</td>
+        <td>单价 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_USEAGE</td>
+        <td>房屋用途 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_WEI</td>
+        <td>几卫 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_YANG</td>
+        <td>阳台 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SALE_YEAR</td>
+        <td>房屋年代 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SECTION_ID</td>
+        <td>片区Id</td>
+    </tr>
+    <tr>
+        <td colspan="2">SECTION_NAME</td>
+        <td>片区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SHOP_USAGE</td>
+        <td>商铺用途 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TAG_IDS</td>
+        <td>房源标签 </td>
+    </tr>
+    <tr>
+        <td colspan="2">THUMB_URL</td>
+        <td>缩略图文件路径 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TRADE_ADDR</td>
+        <td>商铺地址 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UG_AREA</td>
+        <td>地下面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UG_TYPE</td>
+        <td>地下类型 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_ID</td>
+        <td>经纪人ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_TIME</td>
+        <td>最后更新时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">VIDEO_NUM</td>
+        <td>视频数量 </td>
+    </tr>
+    <tr>
+        <td colspan="2">VEDIO_INFO</td>
+        <td><table border="1" cellpadding="0" cellspacing="0" class="in">
+            <tr>
+                <td>VIDEO_ID</td>
+                <td>视频ID</td>
+            </tr>
+            <tr>
+                <td>VIDEO_ADDR</td>
+                <td>视频地址 </td>
+            </tr>
+            <tr>
+                <td>PHOTO_ADDR</td>
+                <td>图片地址 </td>
+            </tr>
+            <tr>
+                <td>TORRENT_ADDR</td>
+                <td>Torrent地址 </td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+
+<h2><a name="_Toc84588">2</a>、优优好房获取出租房源列表接口</h2>
+<table class="out" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+        <td colspan="3">访问地址 </td>
+    </tr>
+    <tr>
+        <td colspan="3">{root}/getLeaseList</td>
+    </tr>
+    <tr>
+        <td width="109">参数 </td>
+        <td width="70">必须 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td><a name="OLE_LINK1">COMP_NO</a></td>
+        <td>是 </td>
+        <td>公司编号 </td>
+    </tr>
+    <tr>
+        <td>SYNC_VERIFYID</td>
+        <td>是 </td>
+        <td>公司唯一检验码（请谨慎保管） </td>
+    </tr>
+    <tr>
+        <td>LAST_TIME_LEASE</td>
+        <td>否 </td>
+        <td>指定更新时间节点 </td>
+    </tr>
+    <tr>
+        <td>RECENT_FLAG</td>
+        <td>否 </td>
+        <td>指定是否重新获取  0 否 1 是 </td>
+    </tr>
+    <tr>
+        <td colspan="3">返回值 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DATA</td>
+        <td>数据集 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRCODE</td>
+        <td>错误编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRMSG</td>
+        <td>错误信息 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LAST_TIME_LEASE</td>
+        <td>本次更新时间节点 </td>
+    </tr>
+    <tr>
+        <td colspan="2">NEXT_TIME_LEASE</td>
+        <td>下次更新时间节点 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SERVER_TIME</td>
+        <td>系统时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TOTAL</td>
+        <td>总数 </td>
+    </tr>
+    <tr>
+        <td colspan="3">数据集 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">BUILD_CODE</td>
+        <td>楼盘检索码 </td>
+    </tr>
+    <tr>
+        <td colspan="2">BUILD_ID</td>
+        <td>楼盘ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">BUILD_NAME</td>
+        <td>楼盘名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">GARAGE_AMOUNT</td>
+        <td>车位数量 </td>
+    </tr>
+    <tr>
+        <td colspan="2">GARDEN_AREA</td>
+        <td>花园面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">HALL_STRUCTURE</td>
+        <td>厅结构 </td>
+    </tr>
+    <tr>
+        <td colspan="2">IS_SEPERATOR</td>
+        <td>是否可分割（1：是     0：否） </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_ACCOUNT</td>
+        <td>结算 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_AREA</td>
+        <td>建筑面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_CHARACT</td>
+        <td>配套及特色 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_DEPOSIT</td>
+        <td>租房押金 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_DIRECT</td>
+        <td>房源朝向 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_DOORS</td>
+        <td>几户 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_EXPLRTH</td>
+        <td>房勘（1：已勘  0：未勘） </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_FITMENT</td>
+        <td>装修 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_FLOOR</td>
+        <td>所在楼层 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_FLOORS</td>
+        <td>总楼层 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_HALL</td>
+        <td>几厅 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_ID</td>
+        <td>房源ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_INNERAREA</td>
+        <td>套内面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_LADDER</td>
+        <td>几梯 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_LEAVE_TIME</td>
+        <td>腾房日 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_LIMITE</td>
+        <td>租房期限 </td>
+
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_MAP</td>
+        <td>图片张数 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_MEMO</td>
+        <td>内部备注 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_NO</td>
+        <td>房源编码 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_PROPERTY</td>
+        <td>物业费 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_PUBLISH</td>
+        <td>是否发布（1：是  0：否） </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_REG</td>
+        <td>行政区ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_ROOM</td>
+        <td>几房 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_ROUND</td>
+        <td>环域 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_SET</td>
+        <td>室内配套 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_STATUS</td>
+        <td><table border="1" cellpadding="0" cellspacing="0" class="in">
+            <tr>
+                <td>1</td>
+                <td>有效 </td>
+                <td>7</td>
+                <td>注销 </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>封盘 </td>
+                <td>101</td>
+                <td>转售 </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>暂缓 </td>
+                <td>102</td>
+                <td>转租 </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>预订 </td>
+                <td>103</td>
+                <td>转有效 </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>内成交 </td>
+                <td>104</td>
+                <td>转私盘 </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>外成交 </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_STREET</td>
+        <td>是否邻街（1：是  0：否） </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_SUBJECT</td>
+        <td>房源标题 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_TOTAL_PRICE</td>
+        <td>售价 -(租金???)</td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_TYPE</td>
+        <td>房源类型 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_USEAGE</td>
+        <td>房屋用途 
+            <table border="1" cellpadding="0" cellspacing="0" class="in">
+                <tr>
+                    <td><br>
+                        1 </td>
+                    <td>住宅 </td>
+                    <td>5</td>
+                    <td>仓库 </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>别墅 </td>
+                    <td>6</td>
+                    <td>外成交 </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>商铺 </td>
+                    <td>7</td>
+                    <td>车库 </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>写字楼 </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_WEI</td>
+        <td>几卫 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_YANG</td>
+        <td>阳台 </td>
+    </tr>
+    <tr>
+        <td colspan="2">LEASE_YEAR</td>
+        <td>房屋年代 </td>
+    </tr>
+    <tr>
+        <td colspan="2">OFFICE_LEVEL</td>
+        <td>写字楼级别 </td>
+    </tr>
+    <tr>
+        <td colspan="2">OWNER_TYPE</td>
+        <td>权属类型 </td>
+    </tr>
+    <tr>
+        <td colspan="2">PHOTO_ARRAY</td>
+        <td>房源图片数组 
+            <table border="1" cellpadding="0" cellspacing="0" class="in">
+                <tr>
+                    <td>参数 </td>
+                    <td>释意 </td>
+                </tr>
+                <tr>
+                    <td>IS_TOP</td>
+                    <td>首图标记 </td>
+                </tr>
+                <tr>
+                    <td>PHOTO_ID</td>
+                    <td>图片ID</td>
+                </tr>
+                <tr>
+                    <td>PHOTO_SEQ</td>
+                    <td>图片排序字段 </td>
+                </tr>
+                <tr>
+                    <td>PHOTO_ADDR</td>
+                    <td>图片地址 </td>
+                </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td colspan="2">PHOTO_TIME</td>
+        <td>首次上传图片时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">PRICE_UNIT</td>
+        <td>租金单位 </td>
+    </tr>
+    <tr>
+        <td colspan="2">REGION_NAME</td>
+        <td>行政区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">RICH_TEXT</td>
+        <td>富文本 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SECTION_ID</td>
+        <td>片区ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">SECTION_NAME</td>
+        <td>片区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SHOP_USAGE</td>
+        <td>商铺用途 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TAG_IDS</td>
+        <td>房源标签 </td>
+    </tr>
+    <tr>
+        <td colspan="2">THUMB_URL</td>
+        <td>缩略图文件路径 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TRADE_ADDR</td>
+        <td>商铺地址 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UG_AREA</td>
+        <td>地下面积 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UG_TYPE</td>
+        <td>地下类型 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_ID</td>
+        <td>经纪人ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">VIDEO_NUM</td>
+        <td>视频数量 </td>
+    </tr>
+    <tr>
+        <td colspan="2">VEDIO_INFO</td>
+        <td><table border="1" cellpadding="0" cellspacing="0" class="in">
+            <tr>
+                <td>VIDEO_ID</td>
+                <td>视频ID</td>
+            </tr>
+            <tr>
+                <td>VIDEO_ADDR</td>
+                <td>视频地址 </td>
+            </tr>
+            <tr>
+                <td>PHOTO_ADDR</td>
+                <td>图片地址 </td>
+            </tr>
+            <tr>
+                <td>TORRENT_ADDR</td>
+                <td>Torrent地址 </td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_TIME</td>
+        <td>最后更新时间 </td>
+    </tr>
+</table>
+<h2><a name="_Toc30957">3</a>、优优好房获取公司信息接口</h2>
+<table class="out" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+        <td colspan="3">访问地址 </td>
+    </tr>
+    <tr>
+        <td colspan="3">{root}/getCompInfo</td>
+    </tr>
+    <tr>
+        <td width="103">参数 </td>
+        <td width="75">必须 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td>COMP_NO</td>
+        <td>是 </td>
+        <td>公司编号 </td>
+    </tr>
+    <tr>
+        <td>SYNC_VERIFYID</td>
+        <td>是 </td>
+        <td>公司唯一检验码（请谨慎保管） </td>
+    </tr>
+    <tr>
+        <td colspan="3">返回值 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DATA</td>
+        <td>数据集 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRCODE</td>
+        <td>错误编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRMSG</td>
+        <td>错误信息 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SERVER_TIME</td>
+        <td>系统时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TOTAL</td>
+        <td>总数 </td>
+    </tr>
+    <tr>
+        <td colspan="3">数据集 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">APTITUDE_NO</td>
+        <td>资质编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">CITY_ID</td>
+        <td>市(县) </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMMERCIAL_NO</td>
+        <td>执照编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_ADDR</td>
+        <td>公司地址 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_CNAME</td>
+        <td>公司简称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_CONTACT</td>
+        <td>联系人 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_DESC</td>
+        <td>公司描述 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_ID</td>
+        <td>公司ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_NAME</td>
+        <td>公司名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_NO</td>
+        <td>公司编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_TELE</td>
+        <td>联系电话 </td>
+    </tr>
+    <tr>
+        <td colspan="2">CUSTOM_LOG</td>
+        <td>自定义LOG地址 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_TIME</td>
+        <td>最后更新时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_UID</td>
+        <td>最后更新者 </td>
+    </tr>
+    <tr>
+        <td colspan="2">WATERIMG</td>
+        <td>公司自定义水印图片 </td>
+    </tr>
+    <tr>
+        <td colspan="2">WATER_CONFIG</td>
+        <td>水印配置 </td>
+    </tr>
+</table>
+<h2><a name="_Toc28889">4</a>、优优好房获取用户信息接口</h2>
+<table class="out" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+        <td colspan="3">访问地址 </td>
+    </tr>
+    <tr>
+        <td colspan="3">{root}/getUserList</td>
+    </tr>
+    <tr>
+        <td width="103">参数 </td>
+        <td width="75">必须 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td>COMP_NO</td>
+        <td>是 </td>
+        <td>公司编号 </td>
+    </tr>
+    <tr>
+        <td>SYNC_VERIFYID</td>
+        <td>是 </td>
+        <td>公司唯一检验码（请谨慎保管） </td>
+    </tr>
+    <tr>
+        <td colspan="3">返回值 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DATA</td>
+        <td>数据集 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRCODE</td>
+        <td>错误编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRMSG</td>
+        <td>错误信息 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SERVER_TIME</td>
+        <td>系统时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TOTAL</td>
+        <td>总数 </td>
+    </tr>
+    <tr>
+        <td colspan="3">数据集 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ARCHIVE_ID</td>
+        <td>本人id </td>
+    </tr>
+    <tr>
+        <td colspan="2">AREA_ID</td>
+        <td>大区 </td>
+    </tr>
+    <tr>
+        <td colspan="2">AREA_NAME</td>
+        <td>大区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">BBS_PHOTO</td>
+        <td>论坛图片 </td>
+    </tr>
+    <tr>
+        <td colspan="2">CITY_ID</td>
+        <td>城市 </td>
+    </tr>
+    <tr>
+        <td colspan="2">CREATION_TIME</td>
+        <td>信息创建时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_ID</td>
+        <td>公司ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_ID</td>
+        <td>分店ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_NAME</td>
+        <td>分店名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">NICK_NAME</td>
+        <td>用户昵称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">PROFESSION_SUB</td>
+        <td>执业签名 </td>
+    </tr>
+    <tr>
+        <td colspan="2">REG_ID</td>
+        <td>区域ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">REG_NAME</td>
+        <td>片区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_TIME</td>
+        <td>最后更新时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_UID</td>
+        <td>最后更新者 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SERVICE_ZONE</td>
+        <td>服务片区 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_ADDRESS</td>
+        <td>联系地址 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_BIRTHDAY</td>
+        <td>用户出生年月 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_EMAIL</td>
+        <td>邮箱 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_FIXEDPH</td>
+        <td>住宅电话 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_ICCODE</td>
+        <td>身份证 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_ID</td>
+        <td>用户ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_JOB_DATE</td>
+        <td>入职日期 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_MOBILE</td>
+        <td>手机号码 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_NAME</td>
+        <td>用户姓名 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_NO</td>
+        <td>用户编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_PHOTO</td>
+        <td>个人照片 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_PHOTO_MIN</td>
+        <td>个人小头像 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_POSITION</td>
+        <td>担任职务 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_QQ</td>
+        <td>QQ</td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_SEX</td>
+        <td>性别 </td>
+    </tr>
+    <tr>
+        <td colspan="2">USER_WRITEOFF</td>
+        <td>注销标记（1：已注销  0：未注销） </td>
+    </tr>
+    <tr>
+        <td colspan="2">WRITEOFF_TIME</td>
+        <td>注销日期 </td>
+    </tr>
+</table>
+<h2><a name="_Toc5277">5</a>、优优好房获取分店信息接口</h2>
+<table class="out" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+        <td colspan="3">访问地址 </td>
+    </tr>
+    <tr>
+        <td colspan="3">{root}/getDeptList</td>
+    </tr>
+    <tr>
+        <td width="103">参数 </td>
+        <td width="75">必须 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td>COMP_NO</td>
+        <td>是 </td>
+        <td>公司编号 </td>
+    </tr>
+    <tr>
+        <td>SYNC_VERIFYID</td>
+        <td>是 </td>
+        <td>公司唯一检验码（请谨慎保管） </td>
+    </tr>
+    <tr>
+        <td colspan="3">返回值 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DATA</td>
+        <td>数据集 </td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRCODE</td>
+        <td>错误编号</td>
+    </tr>
+    <tr>
+        <td colspan="2">ERRMSG</td>
+        <td>错误信息 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SERVER_TIME</td>
+        <td>系统时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">TOTAL</td>
+        <td>总数 </td>
+    </tr>
+    <tr>
+        <td colspan="3">数据集 </td>
+    </tr>
+    <tr>
+        <td width="178" colspan="2">参数 </td>
+        <td width="395">释意 </td>
+    </tr>
+    <tr>
+        <td colspan="2">AREA_ID</td>
+        <td>公司大区ID</td>
+    </tr>
+    <tr>
+        <td colspan="2">AREA_NAME</td>
+        <td>大区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_ID</td>
+        <td>公司ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">COMP_NO</td>
+        <td>公司编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_ADDR</td>
+        <td>分店地址 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_CODE</td>
+        <td>分店拼音 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_CONTACT</td>
+        <td>联系人姓名 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_ID</td>
+        <td>分店ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_NAME</td>
+        <td>分店名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_NO</td>
+        <td>分店编号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_TELE</td>
+        <td>联系电话 </td>
+    </tr>
+    <tr>
+        <td colspan="2">REGION_ID</td>
+        <td>行政区域ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">REGION_NAME</td>
+        <td>行政区域名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">REG_ID</td>
+        <td>片区ID </td>
+    </tr>
+    <tr>
+        <td colspan="2">REG_NAME</td>
+        <td>片区名称 </td>
+    </tr>
+    <tr>
+        <td colspan="2">SEQ_NO</td>
+        <td>序号 </td>
+    </tr>
+    <tr>
+        <td colspan="2">DEPT_DESC</td>
+        <td>分店描述 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_TIME</td>
+        <td>最后更新时间 </td>
+    </tr>
+    <tr>
+        <td colspan="2">UPDATE_UID</td>
+        <td>最后更新者 </td>
+    </tr>
+</table>
+</body>
+</html>
+

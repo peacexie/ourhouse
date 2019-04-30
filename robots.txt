@@ -1,0 +1,26 @@
+#
+# robots.txt for Imcat
+# Version 4.4
+#
+
+
+User-Agent: SomeSpider
+Disallow: /
+
+
+User-agent: *
+
+# Allow
+Allow: /root/run/demo.php
+Allow: /root/run/rest.php
+Allow: /views/base/assets/logo/
+Allow: /ximps/static/file
+
+# Disallow
+Disallow: /@read/
+Disallow: /imcat/
+Disallow: /root/
+Disallow: /views/
+Disallow: /ximps/
+Disallow: /xvars/
+
