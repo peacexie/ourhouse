@@ -1,0 +1,4 @@
+
+-- token_store@2019-04-30 21:25:05 -- 
+INSERT INTO `{pre}token_store{ext}` VALUES 
+('faqs_types','{\"_tags\":\"0\",\"_allt\":\"1\",\"qacom\":\"1\"}','1556632067','1556630267');

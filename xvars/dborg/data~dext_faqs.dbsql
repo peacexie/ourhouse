@@ -1,0 +1,4 @@
+
+-- dext_faqs@2019-04-30 21:25:05 -- 
+INSERT INTO `{pre}dext_faqs{ext}` VALUES 
+('2013-45-6788','贴心猫(IntimateCat)，<b>测试</b>问答！','','','','','','','md');

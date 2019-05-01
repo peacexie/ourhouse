@@ -1,0 +1,8 @@
+
+-- wex_apps@2019-04-30 21:25:05 -- 
+INSERT INTO `{pre}wex_apps{ext}` VALUES 
+('peays','chking','1','V2GVEVcEEyV0yppcVymG','wxce96c26e3d9b8799','6g56666556666r6a6g5565a6a6r56666','','','0','','','0',''),
+('zhanhl','test','1','Jp4_nxa_x4x_ngnxx_nna','wxb864010c7215b0b1','h2112h11h1118h1h11hhh1821hh8221h','wx_zhl_test.jpg','','0','','','0',''),
+('zhanghua','test','1','yyyyytyyt2992292922','wx3b915d8db305b742','zz333zpz3z33z83833883z833p8zz38z','','','0','','','0',''),
+('y08_test','fuwu','1','66cct66666666666666HDchlh','wx77827302390ce603','c8a888jaj833a88388a8cca8j88aj83j','','','0','','','0',''),
+('admin','test','1','yxmmx_yxxyxx_35385335','wx20b06b3c8d4e2a46','554555l545555b5o55l555lo5oxlll5o','wx_tys_test.jpg','','0','','','0','');
