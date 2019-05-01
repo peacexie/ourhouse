@@ -18,11 +18,11 @@ $_demo_tabs = array(
 
 // ### 文件替换 ------------------------
 
-$_files[] = array();
+$_files = array();
 
 // ### db-table替换 ------------------------
 
-$_dbtabs[] = array();
+$_dbtabs = array();
 
 $_updmods = array(); // 'about','info'
 
