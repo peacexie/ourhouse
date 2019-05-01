@@ -16,6 +16,7 @@ i, b { font-style:normal; font-weight:normal; display:inline-block; white-space:
 @media only screen and (max-width:540px){ .head-h1 small span{ display:none; } }
 
 .foot { width:100%; max-width:1140px; margin:20px auto; padding: 10px 0px; clear: both; text-align: center; background-image: url(./views/base/assets/aimg/dg.gd.png); background-position: 0px -140px; }
+.foot p { line-height:180%; }
 .foot p.note, .foot p.copy, .foot p.info { font-size:small; color:#666; }
 .foot p.note { color:#963; }
 .foot .fnav { padding: 10px 0px 5px 0px; }
