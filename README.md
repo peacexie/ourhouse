@@ -62,18 +62,18 @@
   - Admin5  - 敬请期待
 
 
-* 安装/配置
- - 数据库配置文件：/root/cfgs/boot/cfg_db.php；
- - 访问起始页：/index.php?start 检查配置；
- - 访问地址：/root/tools/setup/ 安装程序。
- - 不是安装在根目录，配置文件：`/root/cfgs/boot/_paths.php` 
- - 详细配置见[贴心猫通用说明](http://imcat.txjia.com/dev.php?start#s_supend)。
-
-
 * 环境需求：
   - PHP5.4 ~ PHP7.3（推荐：PHP5.6 ~ PHP7.2）
   - 扩展：curl, gd2
   - Mysql：5.x+
+
+
+* 安装/配置
+  - 数据库配置文件：/root/cfgs/boot/cfg_db.php；
+  - 访问起始页：/index.php?start 检查配置；
+  - 访问地址：/root/tools/setup/ 安装程序。
+  - 不是安装在根目录，配置文件：`/root/cfgs/boot/_paths.php` 
+  - 详细配置见[贴心猫通用说明](http://imcat.txjia.com/dev.php?start#s_supend)。
 
 
 ### 重要提示
