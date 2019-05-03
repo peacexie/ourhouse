@@ -7,10 +7,10 @@
 $_demo_tabs = array(
     'dext_house', 'docs_house', 
     'dext_sale', 'docs_sale', 
-    'dext_rent', 'dext_rent', 
+    'dext_rent', 'docs_rent', 
     // 
-    'dext_album', 'dext_hnews', 
-    'dext_huxing', //'dext_xxx', 
+    'docs_album', 'docs_hnews', 
+    'docs_huxing', //'dext_xxx', 
     // 
     'dext_demo', 'docs_demo', 
     'dext_news', 'docs_news', 
