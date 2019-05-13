@@ -3,9 +3,15 @@
 $_ex_ais = array(
     // 百度-翻译
     'fanyi' => array(
-        'id' => '20190402000283653', // AppID
+        'id' => '******', // AppID
         //'ak' => '',
-        'as' => 'wpGRn_NDcXmDJZKPtWFl',
+        'as' => '******',
+        '_tab' => array( // 语言包key => 百度Api-key, 相同的注释掉
+            'cn'=>'zh', //'en'=>'en', // 汉,英
+            'fr'=>'fra', 'es'=>'spa', //'ru'=>'ru', // 法,西,俄
+            //'de'=>'de', 'jp'=>'jp', // 德,日
+            'kr'=>'kor', 'ar'=>'ara', // 韩,阿
+        ),
     ),
     // 百度-自然语言
     'yuyan' => array(
