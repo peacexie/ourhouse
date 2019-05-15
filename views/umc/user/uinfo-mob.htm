@@ -3,11 +3,11 @@
 {block:init}{:parent}<?php
 if($user->userFlag=='Login'){
     $unowtype = $user->uperm['title'];
-    $ordwcnt = $db->table('coms_corder')->where("auser='$uname'")->count(); 
+    $ordwcnt = 0;//$db->table('coms_corder')->where("auser='$uname'")->count(); 
 }else{
     $unowtype = lang('user.pub_guest');
     $unqid = usrPerm::getUniqueid(); 
-    $ordwcnt = $db->table('coms_cocar')->where("ordid='$unqid'")->count();   
+    $ordwcnt = 0;//$db->table('coms_cocar')->where("ordid='$unqid'")->count();   
 }
 $runinfo = $_cbase['run']['query']."(queries)/".round(memory_get_usage()/1024/1024, 3)."(MB); ";
 $mdtitle = $sbtitle = lang('user.pub_cuser'); 
