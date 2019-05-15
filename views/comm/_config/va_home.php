@@ -20,7 +20,7 @@ $_va_home = array(
             'govern' => 'corp', 
             'organize' => 'corp', 
         ),
-        'extra' => array('type','ocar','suite'), // 扩展模块:'home','info','type','ocar'
+        'extra' => array('type','suite'), // 扩展模块:'home','info','type','ocar'
     ),
     
     //mod.home模块首页模板
