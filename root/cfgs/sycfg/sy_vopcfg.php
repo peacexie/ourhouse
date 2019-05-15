@@ -27,18 +27,18 @@ $_sy_vopcfg['tpl'] = array(
         //'/', // 伪静态配置：把`.php?` ->替换为 `/`
         //'.htm', // 伪静态后缀
     ), 
-    'mob' => array(
+    /*'mob' => array(
         array('cn'=>'手机版', 'en'=>'Mobile'),  
         '/mob.php'
-    ), 
+    ),*/
     'umc' => array(
         array('cn'=>'会员中心', 'en'=>'User'),
         '/root/run/umc.php'
     ), 
-    'rest' => array(
+    /*'rest' => array(
         'REST-API', 
         '/root/run/rest.php'
-    ),
+    ),*/
     #'demo' => array('Hello.Demo!','/root/run/demo.php'), 
     'base' => array(
         array('cn'=>'默认首页', 'en'=>'Basic'),
