@@ -1,8 +1,6 @@
 {
 "m1012":{"kid":"m1012","pid":"0","title":"演示","icon":"list-alt","deep":"1","cfgs":""},
 "m2test1":{"kid":"m2test1","pid":"m1012","title":"演示样例","icon":"","deep":"2","cfgs":""},
-"m3demo":{"kid":"m3demo","pid":"m2test1","title":"样例文档","icon":"","deep":"3","cfgs":""},
-"m3drem":{"kid":"m3drem","pid":"m2test1","title":"样例评论","icon":"","deep":"3","cfgs":""},
 "m2test2":{"kid":"m2test2","pid":"m1012","title":"类别详情","icon":"","deep":"2","cfgs":""},
 "m3b3":{"kid":"m3b3","pid":"m2test2","title":"部门介绍","icon":"","deep":"3","cfgs":""},
 "m3b1":{"kid":"m3b1","pid":"m2test2","title":"品牌介绍","icon":"","deep":"3","cfgs":""},
