@@ -64,7 +64,7 @@ $tolurl = PATH_PROJ.'/dev.php';
   <p class="title"><?php lang('tools.bug_tools',0); ?></p>
   <table width="100%" border="1" class="tblist">
   <tr class="tc">
-    <td><a href="binfo.php?phpinfo1" target="_self">phpinfo</a></td>
+    <td><a <?=navlinks('binfo.php?phpinfo1')?> target="_self">phpinfo</a></td>
     <td colspan="2" class="tip">
    <a href="../setup/">Setup - <?php lang('tools.start_setup',0) ?></a>
     </td>
@@ -78,7 +78,7 @@ $tolurl = PATH_PROJ.'/dev.php';
     <td><a href="<?php echo PATH_BASE; ?>?info-color">Color</a></td>
   </tr> 
   <tr class="tc">
-    <td><a href="binfo.php?login"><?php lang('tools.start_login',0) ?></a></td>
+    <td><a <?=navlinks('binfo.php?login')?>><?php lang('tools.start_login',0) ?></a></td>
     <td><a href="../exdiy/rplan.php">rplan</a>-<a href="../exdiy/build.php">build</a></td>
     <td><a href="../exdiy/tagor.php">tagor</a>-<a href="../exdiy/derun.php">derun</a></td>
     <td><a href="dbadm.php"><?php lang('tools.start_dbadmin',0) ?></a></td>
@@ -122,10 +122,10 @@ $scfg = array('min','cerulean','flatly','superhero'); // ,'(ull)'
     <?php if(($ti)%$col==0 && $ti<count($vcfg)){ echo "</tr><tr class='tc'>\n"; }  } ?>
   </tr>
   <tr class="tc" style="border-top:3px solid #A6CAF0;">
-    <td><a href="<?php echo $tolurl; ?>?tools-seal">PHP印章</a></td>
-    <td><a href="<?php echo $tolurl; ?>?tools-qrcode">二维码</a></td>
-    <td><a href="<?php echo $tolurl; ?>?tools-vimg">图片码</a></td>
-    <td><a href="<?php echo $tolurl; ?>?tools-cnconv">拼音</a></td>
+    <td><a href="http://imcat.txjia.com/dev.php?tools-seal">PHP印章</a></td>
+    <td><a href="http://imcat.txjia.com/dev.php?tools-qrcode">二维码</a></td>
+    <td><a href="http://imcat.txjia.com/dev.php?tools-vimg">图片码</a></td>
+    <td><a href="http://imcat.txjia.com/dev.php?tools-cnconv">拼音</a></td>
   </tr> 
   <tr class="tc">
     <td><a href="<?php echo $_cbase['server']['txcode']; ?>/">贴心口袋</a></td>
@@ -155,9 +155,9 @@ $scfg = array('min','cerulean','flatly','superhero'); // ,'(ull)'
   <tr>
     <td class="tc"><?php 
    $rtime = 1000*(microtime(1)-$_cbase['run']['timer']); 
-   $rinfo = basDebug::runInfo();
+   $rinfo = basDebug::runInfo(); 
    echo "<textarea style='width:96%; height:360px; overflow:visible;'>"; 
-   echo "$rtime\n$rinfo\n"; print_r($_cbase); 
+   echo "$rtime\n$rinfo\n"; unset($_cbase['safe'],$_cbase['3aks'],$_cbase['weixin']); print_r($_cbase);  
    echo "</textarea>"; 
    ?></td>
   </tr> 
