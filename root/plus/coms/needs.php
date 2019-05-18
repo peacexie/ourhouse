@@ -60,7 +60,7 @@ if($msg){
 
 
 // mtel重复
-$whr = "part='$fm[part]' AND lpid='$fm[lpid]' AND mtel='$fm[lpid]'";
+$whr = "part='$fm[part]' AND lpid='$fm[lpid]' AND mtel='$fm[mtel]'";
 $whr .= " AND atime>'".($_SERVER["REQUEST_TIME"]-86400)."'";
 $ord = "ORDER BY cid DESC";
 $rp = $db->table('coms_need')->where($whr)->find();
