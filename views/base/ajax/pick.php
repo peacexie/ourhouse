@@ -31,13 +31,23 @@ $fshow = dopFunc::vchkFields($fshow,dopFunc::vgetFields($mcfg['f'],'all','all'))
 if(count($fshow)>4) $fshow = array_slice($fshow,0,4); //$cshow = req('cshow','5','N');
 $ford = dopFunc::vordFields($ford);
 
-$_tab = ['retitle','refval','refname','cntre']; $_arr = [];
-foreach ($_tab as $ck){
-  $$ck = $ck=='cntre' ? req($ck,'1','N') : req($ck, '', 'Title');
-  $_arr[$ck] = $$ck;
-} // $arrs 
-if($cntre<1) $cntre = 1;
-if(empty($retitle)) $retitle = key($fshow); 
+$cntre = req('cntre','1','N'); if($cntre<1) $cntre = 1;
+$retitle = req('retitle','','Title'); if(empty($retitle)) $retitle = key($fshow); 
+$refval = req('refval','','Title');
+$refname = req('refname','','Title');
+$reckey = 'pick_rekeys';
+if($refval && $refname){
+  comCookie::oset($reckey, "$cntre---$retitle---$refval---$refname");
+}else{
+  $reckvals = comCookie::oget($reckey);
+  $reckvala = explode('---', $reckvals);
+  if(count($reckvala)==4){
+    $cntre = $reckvala[0];
+    $retitle = $reckvala[1];
+    $refval = $reckvala[2];
+    $refname = $reckvala[3];
+  }
+}
 
 $msg = ''; 
 
@@ -57,7 +67,7 @@ if(!empty($dop->soarField)){
     $sbar .= "\n&nbsp; $dop->soarMsg:".$so->Area(1,50,$dop->soarField);
 }
 $sbar .= "\n&nbsp; ".$so->Order($dop->soorders,100,lang('plus.pick_xord'),'-1');
-$dop->so->Form($sbar,$msg,5,$_arr);
+$dop->so->Form($sbar,$msg,5);
     
 glbHtml::fmt_head('fmlist',"?",'tblist');
 echo "<th nowrap>".lang('plus.pick_select')."</th>";
@@ -108,3 +118,4 @@ glbHtml::fmt_end(array("mod|$mod"));
 
 echo basJscss::jscode("var pick_retitle='$retitle', pick_refval='$refval', pick_refname='$refname', pick_max=$cntre; pickInit($cntre); ");
 glbHtml::page('end'); 
+
