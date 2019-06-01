@@ -1,17 +1,15 @@
 
 
-* OurHouse(爱窝房产系统) V4.7 Released (2019-05)
+* OurHouse(爱窝房产系统) V4.8 Released (2019-06)
 
 
 --- --- --- --- --- --- --- --- --- 
 
 
-### ChangeLog/更新项目 2019-05-11/18
+### ChangeLog/更新项目 2019-06
 
-* 修正：部署在https下，验证码不显示
-* 修正：php7.3下，一处Deprecated提示
-* 优化：安装系统/重置密码时，改进账号密码的验证
-
+* 更新日志
+  - http://imcat.txjia.com/dev.php?uplog-4_0
 
 --- --- --- --- --- --- --- --- --- 
 
