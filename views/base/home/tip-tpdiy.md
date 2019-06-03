@@ -13,7 +13,9 @@
 * /views/umc/  - 会员中心模板（预留）
 * /views/rest/ - rest API（预留）
 
-模板目录详情，以`前端默认模板`为例，其他类似
+#### 模板目录详情
+
+以`前端默认模板`为例，其他类似
 
 * /views/comm/\_config/ - 模板配置
 * /views/comm/\_ctrls/  - 控制器方法扩展代码
@@ -31,10 +33,20 @@
 * /views/comm/u-inc/afoot.htm - 公共尾文件
 * /views/comm/u-inc/amenu.htm - 公共菜单文件
 
-导航首页相关文件目录
+#### 导航首页
+
+相关文件目录
 
 * /views/base/home/              - 导航首页相关 总目录
 * /views/base/home/en.htm        - 首页模板(英文版，预留)
 * /views/base/home/cn.htm        - 首页模板(中文版，预留)
 * /views/base/home/_layout.htm   - 首页布局
 * 首页需自定义跳转或更多DIY，修改控制器文件 `/views/base/_ctrls/homeCtrl.php` 内的 `homeAct()` 方法
+
+#### 相关链接
+
+* [GitHub](https://github.com/peacexie/ourhouse) - 
+  [Official/演示站](http://ourhouse.txjia.com/) - 
+  [Download](https://github.com/peacexie/ourhouse/archive/master.zip)
+* [Homepage](./index.php) # 
+  [更多:贴心猫文档](http://imcat.txjia.com/dev.php?start)

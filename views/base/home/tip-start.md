@@ -26,11 +26,3 @@
   下载后解压到 `/ures/mdown/` 目录下，解压后结构[如图](http://txjia.com/peace/ourhouse/ures-mdown.png)；
 * 同步采集接口：这里[打包下载](https://github.com/peacexie/ourhouse/blob/patches/%40read-data.rar)，  
   下载后解压到 `/@read/data/` 目录下，自行调试运行；
-
-#### 相关链接
-
-* [GitHub](https://github.com/peacexie/ourhouse) - 
-  [Official/演示站](http://ourhouse.txjia.com/) - 
-  [Download](https://github.com/peacexie/ourhouse/archive/master.zip)
-* [Homepage](./index.php) # 
-  [更多:贴心猫文档](http://imcat.txjia.com/dev.php?start)
