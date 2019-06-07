@@ -26,6 +26,8 @@ $_sy_vopcfg['tpl'] = array(
         '/home.php',
         //'/', // 伪静态配置：把`.php?` ->替换为 `/`
         //'.htm', // 伪静态后缀
+        //'0', // 建议不开启, 伪静态-替换第一层/home/目录，需要调整伪静态规则
+        //array('/home.php','/home.htm'), //  建议为空, 伪静态首页替换；需要增加伪静态规则
     ), 
     /*'mob' => array(
         array('cn'=>'手机版', 'en'=>'Mobile'),  
