@@ -21,8 +21,8 @@ RewriteRule ^(home|chn|vcn|ven|ves|vfr|vru)/([\w|\.|\-]+).htm?(.+)$ $1.php?$2&$3
 # 测试(entry1/entry2测试页)
 # /entry1/news.htm       -> /entry1.php?news
 # /entry1/news.htm?p1=v1 -> /entry1.php?news&p1=v1
-#RewriteRule ^(entry1|entry2)/([\w|\.|\-]+).htm$ $1.php?$2 [QSA,PT]
-#RewriteRule ^(entry1|entry2)/([\w|\.|\-]+).htm?(.+)$ $1.php?$2&$3 [QSA,PT]
+RewriteRule ^(entry1|entry2)/([\w|\.|\-]+).htm$ $1.php?$2 [QSA,PT]
+RewriteRule ^(entry1|entry2)/([\w|\.|\-]+).htm?(.+)$ $1.php?$2&$3 [QSA,PT]
 
 # 测试(test测试页)
 # /test8.html            -> test.php?id=8
