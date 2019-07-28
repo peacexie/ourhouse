@@ -11,7 +11,6 @@
 * /views/comm/ - 前端默认模板（默认/中文）
 * /views/mob/  - 手机版模板（预留）
 * /views/umc/  - 会员中心模板（预留）
-* /views/rest/ - rest API（预留）
 
 #### 模板目录详情
 
