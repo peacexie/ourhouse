@@ -17,6 +17,9 @@ $w1 = $w0-300; $h1 = $h0-50; $h2 = $h0-100;
 // row
 $did = req('did');
 $row = exaHouse::getLprow($did);
+if(empty($row['map']) || !strpos($row['map'],',')){
+    die("Empty Map-Point!");
+}
 $areas = $row['areas'];
 $apid = !empty($locals[$areas]['pid']) ? $locals[$areas]['pid'] : $areas;
 $apname = !empty($locals[$apid]['title']) ? $locals[$apid]['title'] : '';

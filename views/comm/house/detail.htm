@@ -138,11 +138,13 @@
   {inc:"house/_dside"}
 </div>
 
+{if strpos($map,',')>0}
 <div class="row" id="pmap">
   <div class="col-md-12">
       <iframe id='map' src="{surl(0)}?map&did={=$did}&w=1140" frameborder="0" width="100%" scrolling="no"></iframe>
   </div>
 </div>
+{/if}
 
 {inc:"u-inc/ad-bar2"}
 
