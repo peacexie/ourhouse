@@ -56,17 +56,17 @@
 
     <h3 class="dsect">楼盘简介</h3>
     <div class="dtext">
-      <?=tex('texHouse')->vmd($remark);?>
+      <?=tex('texHouse')->vmd(empty($remark)?'':$remark);?>
     </div>
 
     <h3 class="dsect">周边配套</h3>
     <div class="dtext">
-      <?=tex('texHouse')->vmd($remzb);?>
+      <?=tex('texHouse')->vmd(empty($remzb)?'':$remzb);?>
     </div>
 
     <h3 class="dsect">交通线路</h3>
     <div class="dtext">
-      <?=tex('texHouse')->vmd($remjt);?>
+      <?=tex('texHouse')->vmd(empty($remjt)?'':$remjt);?>
     </div>
 
   </div>
