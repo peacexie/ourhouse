@@ -11,16 +11,21 @@ $_sy_domain['subDirs'] = array(
     #'127.0.0.1' => '127.0.0.2', //测试
     'www.txjia.com'          => 'imcat.txjia.com', 
     'txmao.txjia.com'        => 'imcat.txjia.com',
+    'imcat.gz01.bdysite.com' => 'imcat.txjia.com',
 ); //dir-跳转
 // http://imcat.gz01.bdysite.com/
 // http://imcat.pswpower.com/
 
 
 ### 跨域子域名设置
-$_sy_domain['dmacc'] = array(
-    $_SERVER['HTTP_HOST'],
-    //'yscode.txjia.com',
-);
+if(IS_CLI){
+    $_sy_domain['dmacc'] = array();
+}else{
+    $_sy_domain['dmacc'] = array(
+        $_SERVER['HTTP_HOST'],
+        //'yscode.txjia.com',
+    ); 
+}
 
 
 ### 顶级域名设置
