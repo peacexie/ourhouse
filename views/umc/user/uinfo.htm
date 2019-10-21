@@ -25,9 +25,11 @@ $cnt2 = \imcat\umc\texIndoc::expwhr($user,"imy",0,'no',1);
           ({lang(user.uif_nolontip)})</dd>
         <dt>{lang(user.uif_unow)}: </dt><dd>{lang(user.uif_notlogin)}<a href="{surl($ulogin)}">{lang(user.uif_clickl)}</a> {lang(user.uif_or)} <a href="{surl($uapply)}">{lang(user.uif_clickr)}</a>......</dd>
         {else}
+        <!--
         <dt>{lang(user.uif_sysmsg)}: </dt><dd>{lang(user.uif_noreadn,"$cnt1")}, <a href="?indoc-iget&part=ipub">{lang(user.uif_allmsg)}&gt;&gt;</a></dd>
         <dt>{lang(user.uif_corder)}: </dt><dd>{lang(user.uif_noendord,"$ordwcnt")}, <a href="{surl(order)}">{lang(user.uif_allord)}&gt;&gt;</a></dd>
         <dt>{lang(user.pub_indoc)}: </dt><dd>{lang(user.uif_noreadn,"$cnt2")}, <a href="?indoc-iget&part=imy">{lang(user.uif_alldoc)}&gt;&gt;</a>, <a href="{surl(indoc-iedit)}">{lang(user.uif_pub)}&gt;&gt;</a></dd>
+        -->
         {/if}
         <dt>{lang(user.uif_runinfo)}: </dt><dd>{=$runinfo}</dd>
         <dt>{lang(user.uif_sysinfo)}: </dt><dd>ServerTime:{= date('Y-m-d H:i:s'); } IP:{= $_cbase['run']['userip'] ;}</dd>
