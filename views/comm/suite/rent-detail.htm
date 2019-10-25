@@ -14,7 +14,7 @@
           <ul class="ppin_box">
             <?php $pics=data('album',"lpid='$did'","6"); if(!empty($pics)){ foreach($pics as $row){ ?>
             <li> <a xhref='#' target="_blank">
-              <img src="{=$row[mpic]}">
+              <img src="{spic($row['mpic'])}">
               <span>{=$row[title]}</span>
             </a> </li>
             <?php } }?>
