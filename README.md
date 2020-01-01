@@ -70,7 +70,7 @@
 
 
 * 环境需求：
-  - PHP5.4 ~ PHP7.3（推荐：PHP5.6 ~ PHP7.2）
+  - PHP5.4 ~ PHP7.4（推荐：PHP5.6 ~ PHP7.3）
   - 扩展：curl, gd2
   - Mysql：5.x+
 
