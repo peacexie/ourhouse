@@ -47,26 +47,30 @@ class tagCache{
     static function jsData($k,$data){ 
         ob_start();
         $vop = new vopShow(0);
+        $vop->mkv = 'jstag';
         $vop->rjs($data);
         $re = ob_get_contents();
         ob_end_clean(); 
         return $re;
     }
     
-    static function comTag($type, $mkv, &$paras){ 
-        $cac = 0; $cex = $path = $fmkv = ''; 
+    static function comTag($type, $mkv, &$paras){
+        global $_cbase;
+        if(!empty($_cbase['mkv']['q']) && strpos($_cbase['mkv']['q'],'=')>0){
+            return ['','']; // ?mkv&page=2, /mkv?keywd=e
+        }
+        $cac = 0; $cex = $path = '';
         foreach($paras as $k=>$v){ 
             if($v[0]=='cache' && !empty($v[1])){
                 $cac = $v[1];
                 unset($paras[$k]);
             }
-            if($v[0]=='stype' && !isset($v[1])){
-                $fmkv = "-$mkv";
+            if($v[0]=='stype'){
+                $v[1] = empty($v[1]) ? $mkv : $v[1];
             }
             $cex .= '['.implode(',',$v).']';
-        } 
-        if($cac){ 
-            global $_cbase;
+        }
+        if($cac){
             $nowtpl = $_cbase['run']['tplnow']; 
             $vdir = $_cbase['tpl']['vdir']; 
             $path = self::ctPath("[{$nowtpl}][$type]{$cex}", $vdir);
@@ -89,10 +93,10 @@ class tagCache{
         return $path;
     }
     
-    static function setCache($file, $data, $isa=0){
+    static function setCache($file, $data, $isa=0, $isp=0){
         global $_cbase; 
         if($isa){
-            $data['page_bar'] = $_cbase['page']['bar'];
+            $data['page_bar'] = $isp ? $_cbase['page']['bar'] : [];
         }
         extCache::cfSet($file,$data,'ctpl');
     }

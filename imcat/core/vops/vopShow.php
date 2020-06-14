@@ -12,7 +12,7 @@ class vopShow{
     
     public $pgflag = array();
     public $pgbar = array(); //分页信息
-    public $mod, $key, $view, $type;
+    public $mkv, $mod, $key, $view, $type;
     public $tplname, $tplorg, $tplnull; 
     
     function __construct($start=1){
@@ -201,13 +201,15 @@ class vopShow{
         }
     }
     // 解析
-    function tagParse($tagname,$type,$paras=array()){ 
+    function tagParse($tagname, $type, $paras=array()){
         global $_cbase; 
-        $res = tagCache::comTag($type,@$this->mkv,$paras);
+        $res = tagCache::comTag($type, $this->mkv, $paras);
         if(!empty($res[1])){ //缓存
-            $data = $res[1]; 
-            $_cbase['page']['bar'] = @$data['page_bar'];
-            unset($data['page_bar']);
+            $data = $res[1];
+            if(isset($data['page_bar'])){
+                $_cbase['page']['bar'] = $data['page_bar'];
+                unset($data['page_bar']);
+            }
         }else{
             if($type=='Page') $this->chkPage($tagname);
             $this->tagRun('tagnow',$tagname);
@@ -215,7 +217,7 @@ class vopShow{
             $_1tag = new $class($paras);
             $data = $_1tag->getData();
             if($res[0]){
-                tagCache::setCache($res[0],$data,1);
+                tagCache::setCache($res[0],$data,1,$type=='Page');
             }    
         }
         return $data;
