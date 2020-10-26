@@ -159,8 +159,8 @@ DROP TABLE IF EXISTS `{pre}base_catalog{ext}`;
 CREATE TABLE `{pre}base_catalog{ext}` (
   `kid` varchar(12) NOT NULL DEFAULT '',
   `model` varchar(12) NOT NULL DEFAULT '',
-  `pid` varchar(12) NOT NULL,
-  `title` varchar(24) NOT NULL,
+  `pid` varchar(12) NOT NULL DEFAULT '',
+  `title` varchar(24) NOT NULL DEFAULT '',
   `top` int(11) NOT NULL DEFAULT '888',
   `enable` tinyint(4) NOT NULL,
   `deep` tinyint(4) NOT NULL DEFAULT '1',
@@ -168,6 +168,7 @@ CREATE TABLE `{pre}base_catalog{ext}` (
   `char` varchar(1) NOT NULL DEFAULT '',
   `cfgs` text,
   `note` varchar(255) NOT NULL DEFAULT '',
+  `icon` varchar(255) NOT NULL DEFAULT '',
   `aip` varchar(255) NOT NULL DEFAULT '',
   `atime` int(11) NOT NULL DEFAULT '0',
   `auser` varchar(24) NOT NULL DEFAULT '',
