@@ -1,6 +1,6 @@
 
 -- base_catalog@2019-04-30 21:25:04 -- 
-INSERT INTO `{pre}base_catalog{ext}` VALUES 
+INSERT INTO `{pre}base_catalog{ext}` (`kid`, `model`, `pid`, `title`, `top`, `enable`, `deep`, `frame`, `char`, `cfgs`, `note`, `aip`, `atime`, `auser`, `eip`, `etime`, `euser`) VALUES
 ('p1012','cargo','0','手机配件','888','1','1','1','C','','','','0','','','0',''),
 ('p2012','cargo','p1012','手机主机','888','1','2','0','C','','','','0','','','0',''),
 ('p1014','cargo','0','书籍音像','888','1','1','1','C','','','','0','','','0',''),
