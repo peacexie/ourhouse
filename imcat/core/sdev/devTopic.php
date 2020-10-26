@@ -47,7 +47,9 @@ class devTopic{
 
     // nav
     static function navBar($fcfgs,$xfm,$view='',$part=''){
-        extract(basReq::sysVars()); 
+        global $_cbase;
+        extract(basReq::sysVars());
+        $mkv = $_cbase['mkv']['mkv'];
         $burl = "?$mkv&mod=$mod&did=$did&view";
         $icls = 'class="col-xs-4 col-sm-3 col-md-2 col-lg-1 tc pa3"';
         $nav = "\n"; //print_r($xfm);
@@ -256,12 +258,12 @@ class devTopic{
         return $arr;
     }
 
-    static function moveTmpFiles($row=array(),$mod,$kid){
+    static function moveTmpFiles($row=[], $mod='topic', $kid=''){
         $arr = array('mpic','detail');
         foreach ($arr as $key) {
             if(!empty($row[$key])){
                 $ext = $key=='mpic' ? 0 : (strstr($row[$key],'<') ? 1 : 0); 
-                $row[$key] = comStore::moveTmpDir($row[$key], $mod,$kid, $ext);
+                $row[$key] = comStore::moveTmpDir($row[$key], $mod, $kid, $ext);
             }
         }
         return $row;

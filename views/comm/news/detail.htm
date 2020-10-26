@@ -7,8 +7,8 @@ eimp('/layer/layer.js','vendui');
 {/php} 
 
 </head><body> 
-{inc:"u-inc/ahead"}
-{inc:"u-inc/amenu"}
+{inc:"c_pub/ahead"}
+{inc:"c_pub/amenu"}
 
 <div class="row">
   <div class="col-md-9">
@@ -19,12 +19,13 @@ eimp('/layer/layer.js','vendui');
       <li class="active">详情</li>
     </ol>
 
-    {inc:"news/n-detail"}
+    {inc:"base:stpl/_news-detail"} 
+
   </div>
   <div class="col-md-3">
     {inc:"news/b-side"}
   </div>
 </div>
 
-{inc:"u-inc/afoot"}
+{inc:"c_pub/afoot"}
 </body></html>

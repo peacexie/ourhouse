@@ -58,6 +58,10 @@
     </div>
 {/if}
 {if empty($bsend) }
+    <?php 
+    $emajax="url='".PATH_BASE."?ajax-cajax&act=userExists&key=memail'"; 
+    $phem = "placeholder='".lang('user.uap_forgamail')."'";
+    ?>
     <style type="text/css">
     #fmapply .form-control { display:inline-block; }
     </style>
@@ -70,7 +74,7 @@
             {loop $_groups $k $v}{if $v['pid']=='users'}
             {php $cfgm = read($k); $cfgs = basElm::text2arr(@$cfgm['cfgs']); }
             {if !empty($cfgs['defgrade']) }
-            <input name="mod" type="radio" value="{=$k}" onclick="setUserMod(this)" {if $k=='company'}checked{/if} />{=$v[title]} &nbsp; 
+            <input name="mod" type="radio" value="{=$k}" onclick="setUserMod(this)" {if $k=='company'}checked{/if} />{=$v['title']} &nbsp; 
             {/if}{/if}{/loop}
         </p>
         <div class="h03">&nbsp;</div>
@@ -93,10 +97,6 @@
         input::-ms-input-placeholder{text-align: right;}
         input::-webkit-input-placeholder{text-align: right;}
         </style>
-        <?php 
-        $emajax="url='".PATH_BASE."?ajax-cajax&act=userExists&key=memail'"; 
-        $phem = "placeholder='".lang('user.uap_forgamail')."'";
-        ?>
         {/if}
         <p> <i id="iflg_mname">{lang(user.uap_name)}: </i>
             <input id='fm[mname]' name='fm[mname]' type='text' value='' class='txt'  maxlength='24'  reg='str:2-24' style='width:150px';  />

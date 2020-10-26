@@ -15,12 +15,19 @@ class basDebug{
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         $arr = array(); 
         foreach($trace as $k=>$row) {
-            $bf = basename($row['file']);
+            // ["function"]=> string(15) "imcat\{closure}"
+            $tab = ['file'=>'(none)', 'line'=>'-1', 'function'=>'', 'class'=>'', 'type'=>'' ];
+            foreach($tab as $kt=>$vd) {
+                $$kt = empty($row[$kt]) ? $vd : $row[$kt];
+            }
+            $class = $class ? "$class{$type}" : "";
+            $func = $function ? "$class$function(), " : '';
+            $bf = basename($file);
             if(in_array($bf, array('helper.php','basDebug.php'))){
                 unset($trace[$k]);
-                continue;
-            } 
-            $arr[] = "line:{$row['line']} ".self::hidInfo($row['file']);
+                continue;  
+            }
+            $arr[] = ($lev<2?'':$func)."line:{$line}@".self::hidInfo($file);
         }
         echo "\r\n<pre style='line-height:150%;'>"; 
         if($flag) echo "[$flag]\r\n";
@@ -44,7 +51,7 @@ class basDebug{
             echo ' ('.$arr[0].')';
         }else{
             echo "\n".implode("\n",$arr);
-        }
+        } //echo "<pre>"; var_dump($arr);echo "</pre>"; 
         echo "</pre>\r\n";
     }
     // *** 变量列表
@@ -170,8 +177,11 @@ class basDebug{
         $info['run'] = 1000*($info['run'] - $_cbase['run']['timer']);
         if(is_array($msg)){
             $re = '';
-            foreach($msg as $k=>$v){ $v = (is_array($v)||is_object($v)) ? json_encode($v,1) : $v; $re .= "$k=$v; "; }
-            $msg = $re;
+            foreach($msg as $k=>$v){ 
+                $v = is_scalar($v) ? var_export($v,1) : comParse::jsonEncode($v);
+                $re .= "$k=$v;\n"; 
+            }
+            $msg = $re; //dump($msg);
         }
         if($mod!='db'){
             $data = "\nact=$act|$path@".date('Y-m-d H:i:s',$_cbase['run']['stamp'])."<br>";
@@ -233,6 +243,18 @@ class basDebug{
             }
         }
         return $str;
+    }
+    // 隐藏:几层跟目录
+    static function hidRoots($path='', $lev=2){
+        $path = str_replace("\\", '/', $path);
+        if(substr($path,0,1)=='/'){ $path = substr($path,1); }
+        $iniArr = explode('/', $path);
+        $pos = $lev-1;
+        for($i=0;$i<$lev;$i++){
+            $pos += strlen($iniArr[$i]);
+        }
+        $path = '{...}'.substr($path,$pos);
+        return $path;
     }
 
     # log

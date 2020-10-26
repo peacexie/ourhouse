@@ -3,10 +3,11 @@
 {php}
 eimp('initJs','jquery;bootstrap;comm');
 eimp('initCss','bootstrap,stpub;comm;info'); 
+$_groups = read('groups');
 {/php}
 </head><body>
-{inc:"u-inc/ahead"}
-{inc:"u-inc/amenu"}
+{inc:"c_pub/ahead"}
+{inc:"c_pub/amenu"}
 
 
 <div class="row">
@@ -20,8 +21,7 @@ eimp('initCss','bootstrap,stpub;comm;info');
     <div class="row">
     <!--main_start-->
 
-    <!--'about',-->
-    {loop array('house','sale','rent','news','topic','faqs') $mod} 
+    {loop array('about','news','cargo','topic','keres') $mod}
     <div class="col-md-4">
     <ul class="info-nav">
       <li class="type"><a href="{surl($mod,-);}">{=$mod}:{=$_groups[$mod]['title']}</a></li>
@@ -32,7 +32,7 @@ eimp('initCss','bootstrap,stpub;comm;info');
     </div>
     {/loop}
 
-    <!--div class="col-md-4">
+    <div class="col-md-4">
     <ul class="info-nav">
       <li class="type">user:会员操作</li>
       <li><a href="{surl(umc:login)}">home-login</a></li>
@@ -50,7 +50,7 @@ eimp('initCss','bootstrap,stpub;comm;info');
     <li><a href="{surl(info-indep)}">部门信息</a></li>
     <li><a href="{surl(info-umap)}">商家地图</a></li>
     </ul>
-    </div-->
+    </div>
 
     <!--main_end-->
     </div>
@@ -60,7 +60,7 @@ eimp('initCss','bootstrap,stpub;comm;info');
   </div>
 </div>
 
-{inc:"u-inc/afoot"} 
+{inc:"c_pub/afoot"} 
 
 </body></html>
 

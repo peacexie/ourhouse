@@ -56,6 +56,10 @@
 
 {if empty($bsend) }
 
+  <?php 
+  $emajax="url='".PATH_BASE."?ajax-cajax&act=userExists&key=memail'"; 
+  $phem = "placeholder='".lang('user.uap_forgamail')."'";
+  ?>
   <p class="bg-info tc pa10">{lang(user.lon_reg)}</p>
 
   <div class="user-login">
@@ -67,7 +71,7 @@
           {loop $_groups $k $v}{if $v['pid']=='users'}
           {php $cfgm = read($k); $cfgs = basElm::text2arr(@$cfgm['cfgs']); }
           {if !empty($cfgs['defgrade']) }
-          <option value="{=$k}" {if $k=='company'}selected{/if}>{=$v[title]}</option>
+          <option value="{=$k}" {if $k=='company'}selected{/if}>{=$v['title']}</option>
           {/if}{/if}{/loop}
         </select>
       </li>
@@ -91,10 +95,6 @@
     input::-ms-input-placeholder{text-align: right;}
     input::-webkit-input-placeholder{text-align: right;}
     </style>
-    <?php 
-    $emajax="url='".PATH_BASE."?ajax-cajax&act=userExists&key=memail'"; 
-    $phem = "placeholder='".lang('user.uap_forgamail')."'";
-    ?>
     {/if}
     <ul class="row">
       <li class="col-xs-4 col-md-4"><label for="ex2">{lang(user.uap_mail)}</label></li>

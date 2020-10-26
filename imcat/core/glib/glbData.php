@@ -16,6 +16,44 @@ class glbData{
     static $mod, $whr, $lmt, $ord;
     static $type, $sql; // , $res=[]
 
+    // whr: "catid='abc'", "did='2020-key'", "catid='abc' AND xxx"
+    static function cdata($whr, $lmt=1, $ord='click-0'){
+        $cats = read('cdata.i');
+        if(isset($cats[$whr])){
+            $where = "catid='$whr'";
+        }elseif(preg_match("/[\w|\-]+/i", $whr)){
+            $where = "did='$whr'";
+        }else{
+            $where = $whr;
+        }
+        $data = self::get('cdata.join', $where, $lmt, $ord);
+        if(!$data) return [];
+        $tarr = $lmt>1 ?$data : [$data] ;
+        foreach($tarr as $rk=>$row){
+            $vtype = $row['vtype'];
+            $vext = $row['vext'];
+            if($vtype=='kv'){
+                $vdata = basElm::text2arr($vext);
+            }elseif($vtype=='md'){
+                $vdata = extMkdown::pdorg($vext);
+            }elseif($vtype=='json'){
+                $vdata = comParse::jsonDecode($vext);
+            }elseif($vtype=='sec'){
+                $vext = preg_replace_callback("/\s+\[\-\-\-\]+\s+/i", function($itms){
+                    return "[---]"; // 去=号两边空白
+                }, $vext);
+                $vdata = explode('[---]', $vext);
+            }else{ // text
+                $vdata = '';
+            }
+            if(!empty($row['exfile'])){
+                $tarr[$rk]['exfile'] = comStore::picsTab($row['exfile'],0); 
+            }
+            $tarr[$rk]['vdata'] = $vdata;
+        }
+        return $lmt>1 ? $tarr : $tarr[0];
+    }
+
     // 
     static function get($mod, $whr='', $lmt='10', $ord='', $ops=[]){ 
         self::imod($mod);
@@ -67,6 +105,7 @@ class glbData{
         $burl = basReq::getUri(-1,'','page|prec|ptype|pkey');
         $_cbase['page']['bar'] = "<div class='pg_bar'>".$pg->show($idfirst,$idend,'',$burl)."</div>";
         $_cbase['page']['prec'] = $pg->prec;
+        $_cbase['page']['pcnt'] = intval($pg->pcnt);
         return [$res, $sql[0]];
     }
 
@@ -103,7 +142,7 @@ class glbData{
         $pid = self::$cfg['pid'];
         if(in_array($pid,array('docs','users','coms','advs'))){
             if(strstr($whr,"`show`='all'")){
-                $whr = str_replace([" AND `show`='all'","`show`='all'"],'',$whr);
+                $whr = str_replace([" AND `show`='all'","`show`='all' AND ","`show`='all'"],'',$whr);
             }elseif(!strstr($whr,'`show`=')){
                 $whr .= " AND (`show`='1')";
             }

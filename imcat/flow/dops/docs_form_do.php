@@ -1,6 +1,7 @@
 <?php
 namespace imcat;
 (!defined('RUN_DOPA')) && die('No DopA');
+#dump($fm); die();
 
 $dop->svPrep();
 if(!empty($isadd)){ // basReq::in() 
