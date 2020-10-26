@@ -72,7 +72,7 @@
           <ul class="ppin_box">
             <?php $pics=data('album',"lpid='$did'","6"); if(!empty($pics)){ foreach($pics as $row){ ?>
             <li> <a href='{surl("house.$did.tu")}' target="_blank">
-              <img src="{spic($row['mpic'])}">
+              <img src="{=$row[mpic]}">
               <span>{=$row[title]}</span>
             </a> </li>
             <?php } }?>
