@@ -1,14 +1,8 @@
 <?php
 namespace imcat;
 $isMobile = basEnv::isMobile();
-$vcfg = vopTpls::etr1('tpl');
+$vcfg = vopTpls::etr1('tpl'); unset($vcfg['base'],$vcfg['adm'],$vcfg['demo']);  
 $title = $_cbase['sys_name'];
-$icons = array('umc'=>'user', 'comm'=>'laptop','mob'=>'mobile','dev'=>'book','doc'=>'book');
-foreach($vcfg as $vk => $vv) {
-    if(!isset($icons[$vk])){ unset($vcfg[$vk]); }
-}
-
-$lang = $this->key ? $this->key : (empty($lang) ? 'cn' : $lang);
 
 $_mdtab = array('about','start','tpdiy');
 $texts = array();
