@@ -12,8 +12,11 @@ class safComm{ // extends safBase
     static function chkVImg(){
         safComm::urlStamp('check');
         $mod = req('mod'); $key = req('key'); 
-        $key = "{$mod}_{$key}";
+        $key = (is_string($mod)&&is_string($key)) ? "{$mod}_{$key}" : date('mdHis');
         $vcode = req($key);
+        if(is_array($vcode)){
+            safBase::Stop('Error:'.var_export($vcode,1));
+        }
         $re = safComm::formCVimg($mod, $vcode, 'check', 600);
         if(strstr($re,'-Error')){
             echo lang('plus.cajax_vcerr');
@@ -200,11 +203,15 @@ class safComm{ // extends safBase
             $flag = 0;
             $re_stamp = basReq::ark($safix, 'tm');
             $re_encode = basReq::ark($safix, 'enc'); 
-            if(empty($re_stamp) || empty($re_encode)) $flag = 'empty';
-            if($stamp-$re_stamp>$time) $flag = 'timeout';
-            if(!($re_encode==comConvert::sysEncode($sform, $re_stamp))) $flag = 'encode';
+            if(empty($re_stamp) || empty($re_encode)){ 
+                $flag = 'empty'; 
+            }elseif($stamp-$re_stamp>$time){ 
+                $flag = 'timeout';
+            }elseif(!($re_encode==comConvert::sysEncode($sform, $re_stamp))){ 
+                $flag = 'encode'; 
+            }
             if($flag){
-                return ($act=='flag') ? $flag : safBase::Stop('urlStamp');
+                return ($act=='flag') ? $flag : safBase::Stop('urlStamp-'.$flag);
             }
         }
     }

@@ -6,6 +6,20 @@ class devData{
 
     static $spsql = "---<split>---";
 
+    //[/menu_m2pro]
+    // 安装/更新一个模块
+    static function keySqls($data, $key, $rep=1){
+        $db = glbDBObj::dbObj(); 
+        $sqls = basElm::getPos($data, "[$key](*)[/$key]");
+        $sqls = preg_replace("/\s+\-\- ([^\n\r])+/i", '', $sqls);
+        $sqls = str_replace(["`{pre}","{ext}`"], ["`$db->pre","$db->ext`"], $sqls);
+        if($rep){
+            $sqls = str_replace(['INSERT INTO `'], ['REPLACE INTO `'], $sqls);
+        }
+        $sarr = explode(self::$spsql, $sqls);
+        return $sarr;
+    }
+
     // runSql
     static function run1Sql($sql,$rep=''){
         if(empty($sql)) return true;
@@ -20,6 +34,7 @@ class devData{
             $n = 0;
             foreach ($arr as $key => $sql) {
                 $db->query($sql,'run'); 
+                //dump($sql);
                 $n++;
             }
             return $n;
@@ -70,18 +85,25 @@ class devData{
     }
     
     // struExp('/dbexp/');导出结构到文件或返回string
-    static function struExp($path,$dbcfg=array()){ 
+    static function struExp($path, $dbcfg=array()){ 
         $db = db($dbcfg);
         $dbTabs = $db->tables();
-        $re = "";
+        $data = "";
         foreach($dbTabs as $tab){ 
-            $re .= "\n".self::stru1Exp($tab,$dbcfg).";\n";
+            $data .= "\n".self::stru1Exp($tab,$dbcfg).";\n";
         }
+        $data = preg_replace_callback(
+            "/\`\ varchar\(\d+\)\ NOT\ NULL\,/",
+            function($ms){ //dump($ms); 
+                return str_replace("NOT NULL,", "NOT NULL DEFAULT '',", $ms[0]) ;
+            },
+            $data
+        );
         if($path){
             $path = DIR_VARS.$path.'_stru_tables.dbsql';
-            comFiles::put($path,$re);
+            comFiles::put($path, $data);
         }else{
-            return $re;
+            return $data;
         }
     }
     
