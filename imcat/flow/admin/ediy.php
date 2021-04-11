@@ -2,6 +2,11 @@
 namespace imcat;
 (!defined('RUN_INIT')) && die('No Init');
 
+$_cfgfp = '/cfgs/boot/cfg_adbug.php';
+include DIR_ROOT.$_cfgfp; 
+if(empty($can_diycfg)){ 
+    die("Prohibited! Use FTP Edit `$_cfgfp`, And set `\$can_diycfg = '1'; First!`"); 
+}
 $_sy_nava['exdiys'] = array(
     'skin' => '/views',
     'cfgs' => '/root/cfgs',
@@ -39,7 +44,7 @@ if(in_array($part,array('edit','restore','down'))){
         die();
     }elseif(!empty($bsend)){
         $ndata = $_POST['ndata']; //req('ndata','','Html',102400);
-        safScan::deel($ndata);
+        safScan::deel($ndata); 
         safScan::deel($ndata,1);
         @unlink("$fp.maobak"); copy($fp,"$fp.maobak");
         comFiles::put($fp,$ndata);
